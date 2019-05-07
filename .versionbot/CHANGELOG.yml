@@ -1,4 +1,14 @@
 - commits:
+    - subject: Remove ts-node requirement when running compiled code
+      hash: 1154b33b2770b90963630efc77d39cd4ef018f21
+      body: ''
+      footer:
+        Change-type: patch
+        change-type: patch
+      author: Pagan Gazzard
+  version: 0.18.5
+  date: 2019-05-07T14:47:54.578Z
+- commits:
     - subject: Disable the service start limit
       hash: d69d9b2355616685dfb570be6aa6c14ccc97a7c2
       body: ''
