@@ -1,4 +1,18 @@
 - commits:
+    - subject: 'auth: check username blacklist when registering new users'
+      hash: 77f5821d1e824cd70969e79bc0f49c9504ee9e9f
+      body: ''
+      footer:
+        Connects-to: '#120'
+        connects-to: '#120'
+        Change-type: major
+        change-type: major
+        Signed-off-by: Will Boyce <will@balena.io>
+        signed-off-by: Will Boyce <will@balena.io>
+      author: Will Boyce
+  version: 1.0.0
+  date: 2019-06-03T09:51:39.638Z
+- commits:
     - subject: ✨ Add `host` flag to application type model
       hash: 200af08b4d7e78739c7a60eb3338b94fa7dd57a9
       body: |
