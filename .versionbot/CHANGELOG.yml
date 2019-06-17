@@ -1,4 +1,16 @@
 - commits:
+    - subject: Allow newlines in environment variables
+      hash: 857225ec05e91165ff3653faba7316c602fd04d2
+      body: ''
+      footer:
+        Change-type: patch
+        change-type: patch
+        Signed-off-by: Cameron Diver <cameron@balena.io>
+        signed-off-by: Cameron Diver <cameron@balena.io>
+      author: Cameron Diver
+  version: 0.25.1
+  date: 2019-06-17T16:00:14.327Z
+- commits:
     - subject: Cache the resolved subject for /auth/v1/token requests for 5 minutes
       hash: 598ba291937aa1f3631a8daa29e16cb8165815f0
       body: ''
