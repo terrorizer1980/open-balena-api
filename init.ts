@@ -86,6 +86,12 @@ app.enable('trust proxy');
 
 const doRunTests = (process.env.RUN_TESTS || '').trim() === '1';
 
+// we have to load some mocks before the app starts...
+if (doRunTests) {
+	console.log('Loading mocks...');
+	import('./test/test-lib/aws-mock');
+}
+
 setup(app, {
 	config,
 	version,
