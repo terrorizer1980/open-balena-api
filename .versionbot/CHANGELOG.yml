@@ -1,4 +1,16 @@
 - commits:
+    - subject: 'tests: Add fixtures framework'
+      hash: 36eed5a6363242365eb4bd87670439cc5ddb8051
+      body: ''
+      footer:
+        Change-type: patch
+        change-type: patch
+        Signed-off-by: Rich Bayliss <rich@balena.io>
+        signed-off-by: Rich Bayliss <rich@balena.io>
+      author: Rich Bayliss
+  version: 0.27.8
+  date: 2019-06-28T11:31:30.877Z
+- commits:
     - subject: Block removal of the currently deployed release in isolation
       hash: c1e2a8bacef3581a011c8d56070fc2f466b9f341
       body: |
