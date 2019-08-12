@@ -1,4 +1,14 @@
 - commits:
+    - subject: test
+      hash: 2458922dff199f8bd1de316d431ad36c80af856c
+      body: ''
+      footer:
+        Change-Type: minor
+        change-type: minor
+      author: Will Boyce
+  version: 0.29.0
+  date: 2019-08-12T14:44:31.731Z
+- commits:
     - subject: Update open-balena-base to 8.0.2
       hash: 373fb82304c0af31be070b4683cb305b80c15834
       body: |
