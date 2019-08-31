@@ -1,4 +1,27 @@
 - commits:
+    - subject: Add typings to the device state endpoint implementation
+      hash: 5cfb388140605051929732adb9ca960f0568c9b6
+      body: ''
+      footer:
+        Resolves: '#66'
+        resolves: '#66'
+        Change-type: patch
+        change-type: patch
+        Signed-off-by: Thodoris Greasidis <thodoris@balena.io>
+        signed-off-by: Thodoris Greasidis <thodoris@balena.io>
+      author: Thodoris Greasidis
+    - subject: Add typings for some of the models
+      hash: b078af85811e2f209c94ebc51042da7de3d4d251
+      body: ''
+      footer:
+        Change-type: patch
+        change-type: patch
+        Signed-off-by: Thodoris Greasidis <thodoris@balena.io>
+        signed-off-by: Thodoris Greasidis <thodoris@balena.io>
+      author: Thodoris Greasidis
+  version: 0.30.2
+  date: 2019-08-31T12:23:57.897Z
+- commits:
     - subject: Update open-balena-base to 8.0.3
       hash: 401af748db1efd900da2174d1f5d09e216587a96
       body: |
