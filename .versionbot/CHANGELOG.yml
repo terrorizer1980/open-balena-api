@@ -1,4 +1,14 @@
 - commits:
+    - subject: 'hooks: Refactor the release hook queries'
+      hash: 46e0646377b1fe919155916d2ac98e4bab8340c2
+      body: ''
+      footer:
+        Change-type: patch
+        change-type: patch
+      author: Rich Bayliss
+  version: 0.28.8
+  date: 2019-09-06T13:16:46.845Z
+- commits:
     - subject: Update open-balena-base to 8.0.2
       hash: 373fb82304c0af31be070b4683cb305b80c15834
       body: |
