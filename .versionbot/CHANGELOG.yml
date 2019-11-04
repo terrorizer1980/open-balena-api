@@ -1,4 +1,16 @@
 - commits:
+    - subject: "\U0001F6A7: ESR device type support"
+      hash: 11de7f3582a515448c31642253080444d4469d94
+      body: ''
+      footer:
+        Change-type: minor
+        change-type: minor
+        Signed-off-by: Andreas Fitzek <andreas@balena.io>
+        signed-off-by: Andreas Fitzek <andreas@balena.io>
+      author: Andreas Fitzek
+  version: 0.42.0
+  date: 2019-11-04T11:03:57.817Z
+- commits:
     - subject: Fix write access check
       hash: c5eea4e5db7bfabea24fbf4eaff9ffb795ddfdb9
       body: ''
