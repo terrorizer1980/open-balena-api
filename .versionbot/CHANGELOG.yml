@@ -1,4 +1,14 @@
 - commits:
+    - subject: 'WIP: Switch to avajs for parallel tests'
+      hash: 3ad4bc36b55af7b1b40786749a5268eabde220da
+      body: ''
+      footer:
+        Change-type: patch
+        change-type: patch
+      author: Pagan Gazzard
+  version: 0.43.7
+  date: 2019-11-20T00:32:25.148Z
+- commits:
     - subject: Only set the running release in state patch if it's valid
       hash: 81c17140020c95fb4870e6cf0e81cce2861ed00f
       body: ''
