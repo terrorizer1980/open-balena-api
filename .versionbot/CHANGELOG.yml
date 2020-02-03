@@ -1,4 +1,16 @@
 - commits:
+    - subject: Export ExtraParams interface in auth
+      hash: 852c6f9fff76118b39d6c9ea213cb8c9043cb347
+      body: ''
+      footer:
+        Change-type: patch
+        change-type: patch
+        Signed-off-by: Amit Solanki <amit@balena.io>
+        signed-off-by: Amit Solanki <amit@balena.io>
+      author: Amit Solanki
+  version: 0.52.3
+  date: 2020-02-03T20:58:03.217Z
+- commits:
     - subject: Linting fixes for resin-lint 3.x
       hash: ff2c3f14300ff83ef82b20810602d5af5562eacb
       body: ''
