@@ -1,4 +1,14 @@
 - commits:
+    - subject: Minor test suite improvements
+      hash: 73379cec7b0abe32fd185ed24054a3e0aa91c996
+      body: ''
+      footer:
+        Change-type: patch
+        change-type: patch
+      author: Akis Kesoglou
+  version: 0.57.1
+  date: 2020-02-27T15:52:13.488Z
+- commits:
     - subject: Add `supervisor release` resource
       hash: d546930c3730fcbc1e251fe5d8b45cdbdcc380ed
       body: ''
