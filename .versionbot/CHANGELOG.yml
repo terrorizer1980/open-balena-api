@@ -1,4 +1,16 @@
 - commits:
+    - subject: '✨: Use GH contracts repo to find device types'
+      hash: 587038690eab495c5bd8d3c763559c09c9297055
+      body: ''
+      footer:
+        Change-type: minor
+        change-type: minor
+        Signed-off-by: Andreas Fitzek <andreas@balena.io>
+        signed-off-by: Andreas Fitzek <andreas@balena.io>
+      author: Andreas Fitzek
+  version: 0.60.0
+  date: 2020-03-10T15:49:00.610Z
+- commits:
     - subject: add missing VPN_CONNECT_PROXY_PORT to confd env backend
       hash: 2698b74a53ed19076e8f9f71c45d8f63424d531f
       body: ''
