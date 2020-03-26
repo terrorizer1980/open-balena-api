@@ -1,4 +1,17 @@
 - commits:
+    - subject: update pine
+      hash: 4311e4d5986ed394f7121ac8212ee45c1c425617
+      body: |
+        test
+      footer:
+        Change-type: patch
+        change-type: patch
+        Signed-off-by: Andreas Fitzek <andreas@balena.io>
+        signed-off-by: Andreas Fitzek <andreas@balena.io>
+      author: Andreas Fitzek
+  version: 0.63.2
+  date: 2020-03-26T13:13:52.642Z
+- commits:
     - subject: Allow string ids for supervisor_release resources
       hash: 1ddd00bb906c6b83053bcfe8f8ae1c1eeb9c7c5e
       body: ''
