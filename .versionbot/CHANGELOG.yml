@@ -1,4 +1,15 @@
 - commits:
+    - subject: Partially revert "Update to balena-device-config 6.x"
+      hash: 4aaef78a6b84101569f4b3dc3c6af7800c2c571b
+      body: |
+        This reverts commit 8d98f4c4e7091a5d14b106d66154c1d3b1bc80b5.
+      footer:
+        Change-type: patch
+        change-type: patch
+      author: Akis Kesoglou
+  version: 0.72.3
+  date: 2020-04-16T20:02:18.462Z
+- commits:
     - subject: Revert "Remove mixpanel token configuration"
       hash: a5fa3ecd6778966f047d2e32bdc5239163146eee
       body: |
