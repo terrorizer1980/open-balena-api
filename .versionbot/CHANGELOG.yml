@@ -1,4 +1,16 @@
 - commits:
+    - subject: Select "email" on findUser query
+      hash: b8ef08a5921ea6692fc47030b2b23342103766c5
+      body: ''
+      footer:
+        Change-type: minor
+        change-type: minor
+        Signed-off-by: Amit Solanki <amit@balena.io>
+        signed-off-by: Amit Solanki <amit@balena.io>
+      author: Amit Solanki
+  version: 0.74.0
+  date: 2020-04-30T13:31:47.818Z
+- commits:
     - subject: Make use of optional chaining/nullish coalescing
       hash: 4e9ae37b8dca18d6cc73b6a8491137bb4b78c203
       body: ''
