@@ -1,4 +1,14 @@
 - commits:
+    - subject: Add a method checking that env var is not empty
+      hash: df2c9f59170d511d55a0ee98e4ce1801444edf8d
+      body: ''
+      footer:
+        Change-type: minor
+        change-type: minor
+      author: Kakhaber
+  version: 0.76.0
+  date: 2020-05-11T10:05:46.468Z
+- commits:
     - subject: Fix gateway download migration
       hash: 0384b617baa13942c92a2ea8221cf968c29a068a
       body: ''
