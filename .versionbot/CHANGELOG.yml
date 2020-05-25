@@ -1,4 +1,20 @@
 - commits:
+    - subject: 'supervisor release: set target state to current state if already set'
+      hash: b28c0fb3acaeb7a811f36ed7dce0b47259b4a1e2
+      body: ''
+      footer:
+        Depends-on: 'https://github.com/balena-io/balena-api/pull/2606'
+        depends-on: 'https://github.com/balena-io/balena-api/pull/2606'
+        HQ: 'https://github.com/balena-io/balena/pull/2177'
+        hq: 'https://github.com/balena-io/balena/pull/2177'
+        Change-type: patch
+        change-type: patch
+        Signed-off-by: Matthew McGinn <matthew@balena.io>
+        signed-off-by: Matthew McGinn <matthew@balena.io>
+      author: Matthew McGinn
+  version: 0.76.3
+  date: 2020-05-25T15:55:36.546Z
+- commits:
     - subject: Check if there are any devices before checking supervisor release
       hash: 04176c50ae62222d258a88692da464bb30e641c0
       body: ''
