@@ -1,4 +1,14 @@
 - commits:
+    - subject: Simplify valid build fetching for device types
+      hash: 8e892a85725f6bcb0369b7a5dc79d9d79ac4b6cd
+      body: ''
+      footer:
+        Change-type: patch
+        change-type: patch
+      author: Pagan Gazzard
+  version: 0.76.4
+  date: 2020-05-26T12:28:46.495Z
+- commits:
     - subject: Restore support for supervisor that string match on register errors
       hash: 243824fecaf61a78cb23e0221a5aebe67c38d4ff
       body: ''
