@@ -1,4 +1,20 @@
 - commits:
+    - subject: 'supervisor release: set corresponding resource if current state is null'
+      hash: e560e4e577bdfd615478b8646261b981e1e4bf39
+      body: ''
+      footer:
+        Connects-to: 'https://github.com/balena-io/open-balena-api/issues/321'
+        connects-to: 'https://github.com/balena-io/open-balena-api/issues/321'
+        HQ: 'balena-io/balena#2177'
+        hq: 'balena-io/balena#2177'
+        Change-type: patch
+        change-type: patch
+        Signed-off-by: Matthew McGinn <matthew@balena.io>
+        signed-off-by: Matthew McGinn <matthew@balena.io>
+      author: Matthew McGinn
+  version: 0.78.4
+  date: 2020-06-11T17:09:46.426Z
+- commits:
     - subject: Handle filtering for existing services in the query rather than locally
       hash: 056bd481130457fbd474c2987117075db72e6a02
       body: ''
