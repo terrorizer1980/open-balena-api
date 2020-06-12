@@ -1,4 +1,29 @@
 - commits:
+    - subject: Use a huskyrc to keep the package.json cleaner
+      hash: 3d19e1e37d8f6730da57c1e6f9da38a9c44126ab
+      body: ''
+      footer:
+        Change-type: patch
+        change-type: patch
+        Signed-off-by: Thodoris Greasidis <thodoris@balena.io>
+        signed-off-by: Thodoris Greasidis <thodoris@balena.io>
+      author: Thodoris Greasidis
+    - subject: Use a mocharc to keep the package.json cleaner
+      hash: d2354a68d74578619f814344e8fd26c204f80aba
+      body: |
+        Subjectively I prefer having a separate single purpose
+        file rather than a larger package.json.
+        This also avoids unnecessary extra lines on the
+        published package.json.
+      footer:
+        Change-type: patch
+        change-type: patch
+        Signed-off-by: Thodoris Greasidis <thodoris@balena.io>
+        signed-off-by: Thodoris Greasidis <thodoris@balena.io>
+      author: Thodoris Greasidis
+  version: 0.78.5
+  date: 2020-06-12T14:18:37.063Z
+- commits:
     - subject: 'supervisor release: set corresponding resource if current state is null'
       hash: e560e4e577bdfd615478b8646261b981e1e4bf39
       body: ''
