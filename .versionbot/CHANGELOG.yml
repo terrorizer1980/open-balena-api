@@ -1,4 +1,21 @@
 - commits:
+    - subject: Add dependabot configuration
+      hash: f3f5c3876a5c9e9cdcc55b16533b938262c7e48f
+      body: ''
+      footer:
+        Change-type: patch
+        change-type: patch
+        See: >-
+          https://www.flowdock.com/app/rulemotion/d-build-pipelines/threads/mqmgXw4ASi4gKIs1hQdfJkH0OTy
+        see: >-
+          https://www.flowdock.com/app/rulemotion/d-build-pipelines/threads/mqmgXw4ASi4gKIs1hQdfJkH0OTy
+        Signed-off-by: Thodoris Greasidis <thodoris@balena.io>
+        signed-off-by: Thodoris Greasidis <thodoris@balena.io>
+      author: Thodoris Greasidis
+      nested: []
+  version: 0.84.5
+  date: 2020-07-17T13:03:36.793Z
+- commits:
     - subject: Add api key tests
       hash: 54a03c0794295ef1b00f3e65aa69257ee6c1bd8b
       body: ''
