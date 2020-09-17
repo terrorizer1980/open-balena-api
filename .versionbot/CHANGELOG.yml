@@ -1,4 +1,17 @@
 - commits:
+    - subject: Set gpu_mem to 16M by default for all RPI* devices
+      hash: 3b9f66fbfe32e7c6ded59734289fa848d82fa732
+      body: ''
+      footer:
+        Change-type: minor
+        change-type: minor
+        Signed-off-by: Stevche Radevski <stevche@balena.io>
+        signed-off-by: Stevche Radevski <stevche@balena.io>
+      author: Stevche Radevski
+      nested: []
+  version: 0.100.0
+  date: 2020-09-17T10:32:40.631Z
+- commits:
     - subject: Export the heartbeat related DeviceOnlineStates enum
       hash: 414ab1697162349c373e9428f5623039121d76fc
       body: ''
