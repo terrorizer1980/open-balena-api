@@ -1,4 +1,15 @@
 - commits:
+    - subject: Improve `aliasTable` helper
+      hash: 4b6b1bec19390c33d2e652232090840a48eabd1c
+      body: ''
+      footer:
+        Change-type: patch
+        change-type: patch
+      author: Pagan Gazzard
+      nested: []
+  version: 0.102.3
+  date: 2020-10-06T17:37:59.767Z
+- commits:
     - subject: Update dependencies
       hash: ee6489f138e659faa052d8a5a7edab5c600cce4b
       body: |
