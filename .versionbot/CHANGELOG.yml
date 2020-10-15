@@ -1,4 +1,17 @@
 - commits:
+    - subject: Add is of cpu architecture to device type
+      hash: 99d0558c9d3ec063fa006a3fcc9d0e049250e19c
+      body: ''
+      footer:
+        Change-type: minor
+        change-type: minor
+        Signed-off-by: Stevche Radevski <stevche@balena.io>
+        signed-off-by: Stevche Radevski <stevche@balena.io>
+      author: Stevche Radevski
+      nested: []
+  version: 0.104.0
+  date: 2020-10-15T15:34:20.112Z
+- commits:
     - subject: 'device-heartbeat: Only update for requests using the device API Key'
       hash: 0bce898f8dbddf9933e0d62f2236be796091ff51
       body: ''
