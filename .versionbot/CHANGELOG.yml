@@ -1,4 +1,17 @@
 - commits:
+    - subject: 'tests: add basic migration tests'
+      hash: 9dd80d0caee5a44e989036b14cbf5a076a181e42
+      body: ''
+      footer:
+        Change-type: patch
+        change-type: patch
+        Signed-off-by: Matthew McGinn <matthew@balena.io>
+        signed-off-by: Matthew McGinn <matthew@balena.io>
+      author: Matthew McGinn
+      nested: []
+  version: 0.104.2
+  date: 2020-10-26T18:56:00.884Z
+- commits:
     - subject: Update dependencies
       hash: e91626f6f5430a17df1d05d579316e355cf15f87
       body: |
