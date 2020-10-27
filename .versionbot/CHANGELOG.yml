@@ -1,4 +1,23 @@
 - commits:
+    - subject: Move should be and is running release onto the device app relationship
+      hash: d26695def0820acfd089777062c1d4284e68b2e0
+      body: ''
+      footer:
+        Change-type: minor
+        change-type: minor
+      author: Pagan Gazzard
+      nested: []
+    - subject: Convert `device belongs to application` into a link table
+      hash: 10d57b674cdd6fb31bedfa83b6954220a16363d6
+      body: ''
+      footer:
+        Change-type: minor
+        change-type: minor
+      author: Pagan Gazzard
+      nested: []
+  version: 0.106.0
+  date: 2020-10-27T13:00:19.764Z
+- commits:
     - subject: Bump OData version to v6
       hash: dbe0cb97b2b78097f179e058588d826fff7afe84
       body: ''
