@@ -1,4 +1,17 @@
 - commits:
+    - subject: Add DeviceLogsUsageMeter interface to be updated by DeviceLogsBackend
+      hash: 05dda6794f355571c2e7658d313e4ae21d0218a9
+      body: ''
+      footer:
+        Change-type: patch
+        change-type: patch
+        Signed-off-by: Thomas Manning <thomasm@balena.io>
+        signed-off-by: Thomas Manning <thomasm@balena.io>
+      author: Thomas Manning
+      nested: []
+  version: 0.109.5
+  date: 2020-11-16T15:15:50.476Z
+- commits:
     - subject: Add Loki host and port to sentry messages
       hash: 36980076eb5abad778277f9562dec61ae7d96fa7
       body: ''
