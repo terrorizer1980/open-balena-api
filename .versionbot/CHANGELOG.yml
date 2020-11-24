@@ -1,4 +1,17 @@
 - commits:
+    - subject: Change default log backend to LokiBackend
+      hash: 8b0b4c7ea70eace7b8c65ca7143fb311b353a8c1
+      body: ''
+      footer:
+        Change-type: minor
+        change-type: minor
+        Signed-off-by: Thomas Manning <thomasm@balena.io>
+        signed-off-by: Thomas Manning <thomasm@balena.io>
+      author: Thomas Manning
+      nested: []
+  version: 0.111.0
+  date: 2020-11-24T10:39:50.402Z
+- commits:
     - subject: Update dependencies
       hash: 605d1f92878abf2c0c2ffae7179aac7c1d63cc00
       body: ''
