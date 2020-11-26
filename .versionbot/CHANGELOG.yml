@@ -1,4 +1,17 @@
 - commits:
+    - subject: Change Loki backend to handle out of order error silently
+      hash: 46d6178c6e89c87a907f9cb2dd60453aed5d027c
+      body: ''
+      footer:
+        Change-type: patch
+        change-type: patch
+        Signed-off-by: Thomas Manning <thomasm@balena.io>
+        signed-off-by: Thomas Manning <thomasm@balena.io>
+      author: Thomas Manning
+      nested: []
+  version: 0.110.3
+  date: 2020-11-26T09:16:15.026Z
+- commits:
     - subject: Update dependencies
       hash: 605d1f92878abf2c0c2ffae7179aac7c1d63cc00
       body: ''
