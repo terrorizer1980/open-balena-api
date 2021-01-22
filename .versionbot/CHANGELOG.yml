@@ -1,4 +1,15 @@
 - commits:
+    - subject: Parallelize delete cascades with explicit dependencies where necessary
+      hash: 07d62439d980349ba1b9a7886f605705edb727e7
+      body: ''
+      footer:
+        Change-type: minor
+        change-type: minor
+      author: Pagan Gazzard
+      nested: []
+  version: 0.120.0
+  date: 2021-01-22T17:14:07.609Z
+- commits:
     - subject: Switch to using an object to specify dependent resources to delete
       hash: 2f35215e966f3c3951b07f85596e489942f45e50
       body: ''
