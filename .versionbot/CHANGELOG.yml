@@ -1,4 +1,19 @@
 - commits:
+    - subject: 'releases: revert new metadata to reimplement logic'
+      hash: bdf0e07178bba84937cc7c5227d1210d23647903
+      body: ''
+      footer:
+        Signed-off-by: Matthew McGinn <matthew@balena.io>
+        signed-off-by: Matthew McGinn <matthew@balena.io>
+        Change-type: minor
+        change-type: minor
+        Connects-to: 'https://github.com/balena-io/balena-io/issues/2335'
+        connects-to: 'https://github.com/balena-io/balena-io/issues/2335'
+      author: Matthew McGinn
+      nested: []
+  version: 0.130.0
+  date: 2021-03-08T19:31:31.448Z
+- commits:
     - subject: Update pinejs to pick up rule optimizations for inserts
       hash: 44e3007ee0cf216c0b7d48efed602c937d0ffea4
       body: |
