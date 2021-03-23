@@ -1,4 +1,39 @@
 - commits:
+    - subject: Optimize application release pinning use a single GET request
+      hash: 8787be306e463f57a0792dff12fd05c8aef1c99d
+      body: ''
+      footer:
+        Change-type: patch
+        change-type: patch
+        Signed-off-by: Thodoris Greasidis <thodoris@balena.io>
+        signed-off-by: Thodoris Greasidis <thodoris@balena.io>
+      author: Thodoris Greasidis
+      nested: []
+    - subject: 'service-installs: Avoid an extra image-service expand'
+      hash: d7d76b93f24f165ab90d250bee6d5a0f65414163
+      body: ''
+      footer:
+        Change-type: patch
+        change-type: patch
+        Signed-off-by: Thodoris Greasidis <thodoris@balena.io>
+        signed-off-by: Thodoris Greasidis <thodoris@balena.io>
+      author: Thodoris Greasidis
+      nested: []
+    - subject: Optimize application release pinning
+      hash: 8df6d882335d498eb365ea9cd423d2f7ab471f05
+      body: |
+        Brings back the optimizations for that part that we
+        used before #598
+      footer:
+        Change-type: patch
+        change-type: patch
+        Signed-off-by: Thodoris Greasidis <thodoris@balena.io>
+        signed-off-by: Thodoris Greasidis <thodoris@balena.io>
+      author: Thodoris Greasidis
+      nested: []
+  version: 0.133.3
+  date: 2021-03-23T14:06:43.195Z
+- commits:
     - subject: Enable strict options by default and only disable specific ones
       hash: 9ce6cb5e0ca690a34dcb64dfecb3aac2364d0d3b
       body: ''
