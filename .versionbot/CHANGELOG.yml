@@ -1,4 +1,18 @@
 - commits:
+    - subject: Allow composition of a release to be initially `null`
+      hash: cb64491af58cef5f736b735a110203586776c0f6
+      body: >
+        This permits clients to create the release resource far earlier then
+        currently possible — before even inspecting it — which in turn allows it
+        to be monitored sooner.
+      footer:
+        Change-type: minor
+        change-type: minor
+      author: Akis Kesoglou
+      nested: []
+  version: 0.135.0
+  date: 2021-04-13T13:00:44.768Z
+- commits:
     - subject: Update open-balena-base to 11.1.2
       hash: 270b17fa8c873c284eba92536cacc78c05bf310c
       body: |
