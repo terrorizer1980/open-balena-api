@@ -1,4 +1,26 @@
 - commits:
+    - subject: initial conversion of `should track latest release` int -> enum
+      hash: 3202db965bc1c7cf75565640da33b46ea8de4e2c
+      body: >
+        related to
+
+        https://www.flowdock.com/app/rulemotion/resin-tech/threads/Odo2hTtX2f-dnzQkTKRu5mwYZIm,
+
+        this change will allow specifying that an application can track only the
+
+        latest _stable_ release, thus allowing draft + untested release status
+
+        as opt-in release controls
+      footer:
+        Change-type: minor
+        change-type: minor
+        Signed-off-by: Matthew McGinn <matthew@balena.io>
+        signed-off-by: Matthew McGinn <matthew@balena.io>
+      author: Matthew McGinn
+      nested: []
+  version: 0.136.0
+  date: 2021-04-16T22:07:01.862Z
+- commits:
     - subject: Stop allowing cache clearing for multi-level cache
       hash: 091863ebed83d587e08db9889bef647f21326393
       body: |
