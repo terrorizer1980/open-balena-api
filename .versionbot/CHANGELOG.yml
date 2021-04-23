@@ -1,4 +1,143 @@
 - commits:
+    - subject: Ingore unfixed
+      hash: a16f2ca032d98ebe68e784c7d82c93f23c4dd7fe
+      body: ''
+      footer:
+        Change-type: minor
+        change-type: minor
+      author: Dan Goodman
+      nested: []
+    - subject: Back to trivy
+      hash: 1a9aeb9f4e403f5a54bae142118ab40bd537757b
+      body: ''
+      footer:
+        Change-type: minor
+        change-type: minor
+      author: Dan Goodman
+      nested: []
+    - subject: Add curl
+      hash: 560f654c4edb24dff97c0cec1fb1acc114f4b26a
+      body: ''
+      footer:
+        Change-type: minor
+        change-type: minor
+      author: Dan Goodman
+      nested: []
+    - subject: Grype
+      hash: c986b6af6d1bb0530107f69f5a02ef3105a531e0
+      body: ''
+      footer:
+        CHange-type: minor
+        change-type: minor
+      author: Dan Goodman
+      nested: []
+    - subject: Critical
+      hash: dab61f63184630ab0b942402cdacd1da3aa722ec
+      body: ''
+      footer:
+        Change-type: minor
+        change-type: minor
+      author: Dan Goodman
+      nested: []
+    - subject: Exit code
+      hash: 0ce425ab199dde0a28b8d442e9523a4032fd0102
+      body: ''
+      footer:
+        Change-type: minor
+        change-type: minor
+      author: Dan Goodman
+      nested: []
+    - subject: Removed report
+      hash: 96ac3d037da4bfb95d2379cd2146a8eef226c948
+      body: ''
+      footer:
+        Change-type: minor
+        change-type: minor
+      author: Dan Goodman
+      nested: []
+    - subject: Try progress
+      hash: 7c2f1c8e755a1e9abcaa8e9b87f127fead3cb569
+      body: ''
+      footer:
+        Change-type: minor
+        change-type: minor
+      author: Dan Goodman
+      nested: []
+    - subject: Test exiting fail
+      hash: eebfe52f427dd33a2513ff3027d1af4756a548c7
+      body: ''
+      footer:
+        Change-type: minor
+        change-type: minor
+      author: Dan Goodman
+      nested: []
+    - subject: Fix artifact
+      hash: fa50a2b9d39748147795acf88be0c0d44e2fdf97
+      body: ''
+      footer:
+        Change-type: minor
+        change-type: minor
+      author: Dan Goodman
+      nested: []
+    - subject: JSON format
+      hash: 4fd564c21e1a9cbc8c0529de308df5efc2460652
+      body: ''
+      footer:
+        Change-type: minor
+        change-type: minor
+      author: Dan Goodman
+      nested: []
+    - subject: Fix yaml
+      hash: 2d4b998c941bf21a4ee76fbee21865e932b9d59c
+      body: ''
+      footer:
+        Change-type: minor
+        change-type: minor
+      author: Dan Goodman
+      nested: []
+    - subject: Add artifact download
+      hash: b18095553fba772c1f6741fbe43be9c9a107b7f9
+      body: ''
+      footer:
+        Change-type: minor
+        change-type: minor
+      author: Dan Goodman
+      nested: []
+    - subject: Output report
+      hash: 4e42333d71ff46b4981e045117c07436280366e2
+      body: ''
+      footer:
+        Change-type: minor
+        change-type: minor
+      author: Dan Goodman
+      nested: []
+    - subject: Try higher level
+      hash: 24e098de8d9823099f2b123a9c261735e0318ec9
+      body: ''
+      footer:
+        Change-type: minor
+        change-type: minor
+      author: Dan Goodman
+      nested: []
+    - subject: Remove sudo
+      hash: 1b9111c31672a0a99b53a47c24b848713116d1b3
+      body: ''
+      footer:
+        Change-type: minor
+        change-type: minor
+      author: Dan Goodman
+      nested: []
+    - subject: Add trivy
+      hash: 16e13d78ddf511c60f43af1fb2c4881117c1ba49
+      body: ''
+      footer:
+        Change-type: minor
+        change-type: minor
+      author: Dan Goodman
+      nested: []
+  version: 0.136.0
+  date: 2021-04-23T13:03:22.120Z
+- commits:
     - subject: Stop allowing cache clearing for multi-level cache
       hash: 091863ebed83d587e08db9889bef647f21326393
       body: |
