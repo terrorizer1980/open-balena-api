@@ -2,16 +2,22 @@ import * as _ from 'lodash';
 import { sbvrUtils, hooks, permissions } from '@balena/pinejs';
 import type { Filter } from 'pinejs-client-core';
 import type {
+	Application,
 	Device,
 	PickDeferred,
 	Service,
 	ServiceInstall,
 } from '../../../balena-model';
 
-const createReleaseServiceInstalls = async (
+const actOnReleaseServiceInstalls = async (
 	api: sbvrUtils.PinejsClient,
 	deviceIds: number[],
 	releaseFilter: Filter,
+	handler: (
+		api: sbvrUtils.PinejsClient,
+		deviceIds: number[],
+		serviceIds: number[],
+	) => Promise<void>,
 ): Promise<void> => {
 	if (deviceIds.length === 0) {
 		return;
@@ -54,6 +60,38 @@ const createReleaseServiceInstalls = async (
 	}
 	const serviceIds = services.map(({ id }) => id);
 
+	await handler(api, deviceIds, serviceIds);
+};
+
+const actOnAppServiceInstalls = async (
+	api: sbvrUtils.PinejsClient,
+	appIds: number[],
+	deviceIds: number[],
+	handler: (
+		api: sbvrUtils.PinejsClient,
+		deviceIds: number[],
+		serviceIds: number[],
+	) => Promise<void>,
+): Promise<void> =>
+	actOnReleaseServiceInstalls(
+		api,
+		deviceIds,
+		{
+			should_be_running_on__application: {
+				$any: {
+					$alias: 'a',
+					$expr: { a: { id: { $in: appIds } } },
+				},
+			},
+		},
+		handler,
+	);
+
+const serviceInstallCreationHandler = async (
+	api: sbvrUtils.PinejsClient,
+	deviceIds: number[],
+	serviceIds: number[],
+) => {
 	const serviceInstalls = (await api.get({
 		resource: 'service_install',
 		options: {
@@ -93,16 +131,55 @@ const createReleaseServiceInstalls = async (
 	);
 };
 
-const createAppServiceInstalls = async (
+const createReleaseServiceInstalls = (
+	api: sbvrUtils.PinejsClient,
+	deviceIds: number[],
+	releaseFilter: Filter,
+): Promise<void> =>
+	actOnReleaseServiceInstalls(
+		api,
+		deviceIds,
+		releaseFilter,
+		serviceInstallCreationHandler,
+	);
+
+const createAppServiceInstalls = (
 	api: sbvrUtils.PinejsClient,
 	appId: number,
 	deviceIds: number[],
-): Promise<void> =>
-	createReleaseServiceInstalls(api, deviceIds, {
-		should_be_running_on__application: {
-			$any: {
-				$alias: 'a',
-				$expr: { a: { id: appId } },
+) =>
+	actOnAppServiceInstalls(
+		api,
+		[appId],
+		deviceIds,
+		serviceInstallCreationHandler,
+	);
+
+const deleteServiceInstallsForApp = (
+	api: sbvrUtils.PinejsClient,
+	appIds: number[],
+	deviceIds: number[],
+) =>
+	api.delete({
+		resource: 'service_install',
+		options: {
+			$filter: {
+				device: { $in: deviceIds },
+				installs__service: {
+					$any: {
+						$alias: 's',
+						$expr: {
+							s: {
+								application: {
+									$any: {
+										$alias: 'a',
+										$expr: { a: { id: { $in: appIds } } },
+									},
+								},
+							},
+						},
+					},
+				},
 			},
 		},
 	});
@@ -155,27 +232,65 @@ hooks.addPureHook('POST', 'resin', 'device', {
 });
 
 hooks.addPureHook('PATCH', 'resin', 'device', {
-	POSTRUN: async (args) => {
-		const affectedIds = args.request.affectedIds!;
+	PRERUN: async (args) => {
+		const affectedDeviceIds = args.request.affectedIds!;
 
-		// We need to delete all service_install resources for the current device and
+		// We need to delete all service_install resources for the current device / app and
 		// create new ones for the new application (if the device is moving application)
-		if (
-			args.request.values.belongs_to__application != null &&
-			affectedIds.length !== 0
-		) {
-			await args.api.delete({
-				resource: 'service_install',
+		const newAppId = args.request.values.belongs_to__application;
+		if (newAppId && affectedDeviceIds.length !== 0) {
+			const createHandler = async (
+				api: sbvrUtils.PinejsClient,
+				deviceIds: number[],
+				serviceIds: number[],
+			) => {
+				await Promise.all(
+					deviceIds.map(async (deviceId) => {
+						await Promise.all(
+							serviceIds.map(async (serviceId) => {
+								// Create a service_install for this pair of service and device
+								await api.post({
+									resource: 'service_install',
+									body: {
+										device: deviceId,
+										installs__service: serviceId,
+									},
+									options: { returnResource: false },
+								});
+							}),
+						);
+					}),
+				);
+			};
+
+			const apps = (await args.api.get({
+				resource: 'application',
 				options: {
+					$select: ['id'],
 					$filter: {
-						device: { $in: affectedIds },
+						owns__device: {
+							$any: {
+								$alias: 'd',
+								$expr: { d: { id: { $in: affectedDeviceIds } } },
+							},
+						},
 					},
 				},
-			});
-			await createAppServiceInstalls(
+			})) as Array<Pick<Application, 'id'>>;
+
+			const existingAppIds = apps.map((a) => a.id);
+
+			// delete service installs for devices currently with this app
+			await deleteServiceInstallsForApp(
 				args.api,
-				args.request.values.belongs_to__application,
-				affectedIds,
+				existingAppIds,
+				affectedDeviceIds,
+			);
+			await actOnAppServiceInstalls(
+				args.api,
+				[newAppId],
+				affectedDeviceIds,
+				createHandler,
 			);
 		}
 	},
@@ -221,6 +336,22 @@ hooks.addPureHook('PATCH', 'resin', 'device', {
 					),
 				);
 			}
+		}
+	},
+});
+
+hooks.addPureHook('PATCH', 'resin', 'device', {
+	POSTRUN: async ({ api, request }) => {
+		const affectedIds = request.affectedIds!;
+		if (affectedIds.length === 0) {
+			return;
+		}
+
+		// Create supervisor service installs when the supervisor is pinned
+		if (request.values.should_be_managed_by__release) {
+			await createReleaseServiceInstalls(api, affectedIds, {
+				id: request.values.should_be_managed_by__release,
+			});
 		}
 	},
 });
