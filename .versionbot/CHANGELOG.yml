@@ -1,4 +1,15 @@
 - commits:
+    - subject: Refactoring in preparation for supervisor service-installs
+      hash: abf684c1485fe7617ccf8be6fef25f7937e030f3
+      body: ''
+      footer:
+        Change-type: patch
+        change-type: patch
+      author: toochevere
+      nested: []
+  version: 0.139.4
+  date: 2021-05-18T14:10:41.941Z
+- commits:
     - subject: Expose a `skipLogging` middleware
       hash: b800a7e7fa0f95720f1ea8da99dfb41ce6a22ec9
       body: ''
