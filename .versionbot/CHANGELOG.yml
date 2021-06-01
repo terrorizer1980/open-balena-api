@@ -1,4 +1,28 @@
 - commits:
+    - subject: Modify state endpoint to handle the supervisor as an application
+      hash: 1da4bcc94c6e5faa3dc6bf1cf30f65005b2b82bf
+      body: |
+        V2, Add setting supervisor_version when PATCHing device state
+        V3, Return supervisor in device target state as an app
+        V3, Restructure apps in device state to key off of uuid instead of appId
+      footer:
+        Change-type: minor
+        change-type: minor
+        Signed-off-by: PJ Zoulin <pj@balena.io>
+        signed-off-by: PJ Zoulin <pj@balena.io>
+      author: toochevere
+      nested: []
+    - subject: Create service installs for target supervisor releases
+      hash: 1cab8fcd7b12598def92b5b4a165adc8e7184612
+      body: ''
+      footer:
+        Change-type: patch
+        change-type: patch
+      author: Pagan Gazzard
+      nested: []
+  version: 0.141.0
+  date: 2021-06-01T14:58:22.923Z
+- commits:
     - subject: Only delete service installs for the current app when moving
       hash: 6decbc00643cec39bc26e206bc6268a51768128f
       body: ''
