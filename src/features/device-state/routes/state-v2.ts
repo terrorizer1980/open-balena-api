@@ -15,28 +15,14 @@ import {
 } from '../utils';
 import { sbvrUtils, errors, dbModule } from '@balena/pinejs';
 import { events } from '..';
+import { rejectUiConfig, varListInsert } from './state-v3';
 
 const { UnauthorizedError } = errors;
 const { api } = sbvrUtils;
 
-export type EnvVarList = Array<{ name: string; value: string }>;
-export const varListInsert = (
-	varList: EnvVarList,
-	obj: Dictionary<string>,
-	filterFn: (name: string) => boolean = () => true,
-) => {
-	varList.forEach(({ name, value }) => {
-		if (filterFn(name)) {
-			obj[name] = value;
-		}
-	});
-};
-export const rejectUiConfig = (name: string) =>
-	!/^(BALENA|RESIN)_UI/.test(name);
-
 type CompositionService = AnyObject;
 type LocalStateApp = StateV2['local']['apps'][string];
-type StateV2 = {
+export type StateV2 = {
 	local: {
 		name: string;
 		config: {
