@@ -1,4 +1,19 @@
 - commits:
+    - subject: Delete CODEOWNERS
+      hash: a496dee5cdbccf77a99887d932869601debd5bc4
+      body: ''
+      footer:
+        See: >-
+          https://www.flowdock.com/app/rulemotion/pub/threads/trLcZFnSX9fLZn4LiaIv4xuBbah
+        see: >-
+          https://www.flowdock.com/app/rulemotion/pub/threads/trLcZFnSX9fLZn4LiaIv4xuBbah
+        Change-type: patch
+        change-type: patch
+      author: Thodoris Greasidis
+      nested: []
+  version: 0.143.2
+  date: 2021-06-30T15:38:12.138Z
+- commits:
     - subject: Avoid unnecessary `getAffectedIds` calls when updating devices
       hash: 69518683f9d479113cceabe2b837ac6984c0e2fc
       body: |
