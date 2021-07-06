@@ -1,4 +1,19 @@
 - commits:
+    - subject: Support navigating between applications and their actor
+      hash: 2a8d1a336e237aeb676f7a554492e09fa5f138eb
+      body: ''
+      footer:
+        Resolves: '#707'
+        resolves: '#707'
+        Change-type: minor
+        change-type: minor
+        Signed-off-by: Thodoris Greasidis <thodoris@balena.io>
+        signed-off-by: Thodoris Greasidis <thodoris@balena.io>
+      author: Thodoris Greasidis
+      nested: []
+  version: 0.144.0
+  date: 2021-07-06T16:35:12.061Z
+- commits:
     - subject: Update dependencies
       hash: a7eef31c191d5b4eb84b669f3ec3141bd8c17761
       body: |
