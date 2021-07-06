@@ -1,4 +1,19 @@
 - commits:
+    - subject: 'env-vars: Remove check for reserved namespaces'
+      hash: 7f18d1e0f87132bbe61960294179a0af703205c8
+      body: |
+        This was leftover legacy behaviour from when config vars
+        were handled the same way as env vars.
+      footer:
+        Change-type: patch
+        change-type: patch
+        Signed-off-by: Kyle Harding <kyle@balena.io>
+        signed-off-by: Kyle Harding <kyle@balena.io>
+      author: Kyle Harding
+      nested: []
+  version: 0.143.6
+  date: 2021-07-06T14:59:12.487Z
+- commits:
     - subject: Update dependencies
       hash: a7eef31c191d5b4eb84b669f3ec3141bd8c17761
       body: |
