@@ -27,20 +27,34 @@ const createContext = (extra = {}) => {
 };
 
 describe('loki backend', () => {
-	it('should successfully publish log', async () => {
+	it.only('should successfully publish log', async () => {
 		const loki = new LokiBackend();
 		const response = await loki.publish(createContext(), [createLog()]);
 		expect(response).to.be.not.null;
 	});
 
-	it('should store and retrieve device log', async () => {
-		const loki = new LokiBackend();
-		const ctx = createContext();
-		const log = createLog();
-		const response = await loki.publish(ctx, [_.clone(log)]);
-		expect(response).to.be.not.null;
-		const history = await loki.history(ctx, 1000);
-		expect(history[history.length - 1]).to.deep.equal(log);
+	it.only('should store and retrieve device log', async () => {
+		for (let i = 0; i < 10; i++) {
+			const reference = Math.trunc(Math.random() * 1000);
+			console.log(`######### {reference: ${reference}}`);
+			const loki = new LokiBackend();
+			const ctx = createContext();
+			const log = createLog({ reference });
+			const response = await loki.publish(ctx, [_.clone(log)]);
+			// expect(response).to.be.not.null;
+			const history = await loki.history(ctx, 1000);
+			// expect(history[history.length - 1]).to.deep.equal(log);
+			const test = _.isEqual(history[history.length - 1], log);
+			if (!test) {
+				console.log(
+					`expected ${JSON.stringify(
+						_.pick(log, ['timestamp', 'reference']),
+					)} -- actually ${JSON.stringify(
+						_.pick(history[history.length - 1], ['timestamp', 'reference']),
+					)}`,
+				);
+			}
+		}
 	});
 
 	it('should convert multiple logs with different labels to streams and then back to logs', function () {
