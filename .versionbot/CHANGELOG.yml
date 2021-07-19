@@ -1,4 +1,19 @@
 - commits:
+    - subject: Add BALENA_SUPERVISOR_DEVELOPMENT_MODE config var in the schema
+      hash: a7d0e354a32b9fb9dc6c17e55c82e2d86a1c1d25
+      body: ''
+      footer:
+        Change-type: patch
+        change-type: patch
+        Depends-on: 'https://github.com/balena-os/meta-balena/pull/2227'
+        depends-on: 'https://github.com/balena-os/meta-balena/pull/2227'
+        Signed-off-by: Alex Gonzalez <alexg@balena.io>
+        signed-off-by: Alex Gonzalez <alexg@balena.io>
+      author: Alex Gonzalez
+      nested: []
+  version: 0.146.1
+  date: 2021-07-19T09:39:22.136Z
+- commits:
     - subject: 'rate-limiting: Add a required key scope parameter'
       hash: 2e0ee15a227837e9a60edbc3ea68b85efd67f965
       body: ''
