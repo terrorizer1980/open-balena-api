@@ -363,8 +363,8 @@ describe('Device State v2 patch', function () {
 
 	it('should save the updated device state', async () => {
 		const devicePatchBody = {
-			local: {
-				device_name: 'reported_device_name',
+			[device.uuid]: {
+				name: 'reported_device_name',
 				status: 'Idle',
 				is_online: true,
 				os_version: 'balenaOS 2.50.1+rev1',
@@ -388,7 +388,7 @@ describe('Device State v2 patch', function () {
 			},
 		};
 
-		await device.patchStateV2(devicePatchBody);
+		await device.patchStateV3(devicePatchBody);
 
 		const {
 			body: {
@@ -398,10 +398,11 @@ describe('Device State v2 patch', function () {
 			.get(`/${version}/device(${device.id})`)
 			.expect(200);
 
-		Object.keys(devicePatchBody.local).forEach(
-			(field: keyof typeof devicePatchBody['local']) => {
-				expect(updatedDevice[field], field).to.equal(
-					devicePatchBody.local[field],
+		Object.keys(devicePatchBody[device.uuid]).forEach(
+			(field: keyof typeof devicePatchBody[string]) => {
+				const expectedField = field === 'name' ? 'device_name' : field;
+				expect(updatedDevice[expectedField], expectedField).to.equal(
+					devicePatchBody[device.uuid][field],
 				);
 			},
 		);

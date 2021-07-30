@@ -6,6 +6,7 @@ import { supertest, UserObjectParam } from './supertest';
 import { version } from './versions';
 import { StateV2 } from '../../src/features/device-state/routes/state-v2';
 import { StateV3 } from '../../src/features/device-state/routes/state-v3';
+import { StatePatchV3Body } from '../../src/features/device-state/routes/state-patch-v3';
 
 export async function getState(
 	user: UserObjectParam,
@@ -86,9 +87,9 @@ export async function provisionDevice(
 				.send(devicePatchBody)
 				.expect(200);
 		},
-		patchStateV3: async (devicePatchBody: AnyObject) => {
+		patchStateV3: async (devicePatchBody: StatePatchV3Body) => {
 			await supertest(device)
-				.patch(`/device/v3/${device.uuid}/state`)
+				.patch(`/device/v3/state`)
 				.send(devicePatchBody)
 				.expect(200);
 		},

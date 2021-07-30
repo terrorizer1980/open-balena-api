@@ -17,7 +17,7 @@ import {
 const { BadRequestError, UnauthorizedError } = errors;
 const { api } = sbvrUtils;
 
-const upsertImageInstall = async (
+export const upsertImageInstall = async (
 	resinApi: sbvrUtils.PinejsClient,
 	imgInstall: Pick<ImageInstall, 'id'>,
 	{
@@ -29,7 +29,7 @@ const upsertImageInstall = async (
 		imageId: number;
 		releaseId: number;
 		status: unknown;
-		downloadProgress: unknown;
+		downloadProgress?: unknown;
 	},
 	deviceId: number,
 ): Promise<void> => {
@@ -69,7 +69,7 @@ const upsertImageInstall = async (
 	}
 };
 
-const deleteOldImageInstalls = async (
+export const deleteOldImageInstalls = async (
 	resinApi: sbvrUtils.PinejsClient,
 	deviceId: number,
 	imageIds: number[],
@@ -235,7 +235,7 @@ type StatePatchBody = {
 		is_on__commit?: string | null;
 		apps?: Array<{
 			services?: {
-				[serviceId: string]: {
+				[imageId: string]: {
 					releaseId: number;
 					status: string;
 					download_progress: number;
@@ -254,7 +254,7 @@ type StatePatchBody = {
 	};
 };
 
-export const statePatch: RequestHandler = async (req, res) => {
+export const statePatchV2: RequestHandler = async (req, res) => {
 	const { uuid } = req.params;
 	if (!uuid) {
 		return res.status(400).end();
