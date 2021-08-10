@@ -35,12 +35,15 @@ export const varListInsert = (
 export const rejectUiConfig = (name: string) =>
 	!/^(BALENA|RESIN)_UI/.test(name);
 
-type LocalStateApp = StateV3['local']['apps'][string];
+type LocalStateApp = StateV3[string]['apps'][string];
 type ServiceComposition = AnyObject;
 export type StateV3 = {
 	[uuid: string]: {
 		name: string;
 		parent_device?: string;
+		config?: {
+			[varName: string]: string;
+		};
 		apps: {
 			[uuid: string]: {
 				/**
@@ -50,9 +53,6 @@ export type StateV3 = {
 				name: string;
 				parent_app?: string;
 				is_host?: boolean;
-				config: {
-					[varName: string]: string;
-				};
 				releases?: {
 					[uuid: string]: {
 						/**
@@ -84,10 +84,10 @@ export type StateV3 = {
 								composition?: ServiceComposition;
 							};
 						};
+						volumes?: AnyObject;
+						networks?: AnyObject;
 					};
 				};
-				volumes?: AnyObject;
-				networks?: AnyObject;
 			};
 		};
 	};
@@ -188,10 +188,10 @@ function buildAppFromRelease(
 		},
 	};
 	if (composition.networks != null) {
-		stateApp.networks = composition.networks;
+		stateApp.releases[release.commit].networks = composition.networks;
 	}
 	if (composition.volumes != null) {
-		stateApp.volumes = composition.volumes;
+		stateApp.releases[release.commit].volumes = composition.volumes;
 	}
 	return stateApp;
 }
@@ -318,14 +318,15 @@ export const getStateV3 = async (
 	const supervisorRelease = device.should_be_managed_by__release?.[0];
 	if (supervisorRelease) {
 		apps = {
-			...getSupervisorAppState(device, config),
+			...getSupervisorAppState(device),
 			...apps,
 		};
 	}
-	const state = {
+	const state: StateV3 = {
 		[uuid]: {
 			name: device.device_name,
 			apps,
+			config,
 		},
 	};
 
@@ -399,7 +400,7 @@ const getAppState = (
 	application: AnyObject,
 	release: AnyObject | undefined,
 	config: Dictionary<string>,
-): StateV3['local']['apps'] => {
+): StateV3[string]['apps'] => {
 	return {
 		[application.uuid]: buildAppFromRelease(
 			device,
@@ -410,7 +411,6 @@ const getAppState = (
 				id: application.id,
 				name: application.app_name,
 				is_host: application.is_host,
-				config,
 			},
 		),
 	};
@@ -419,19 +419,17 @@ const getAppState = (
 const getUserAppState = (
 	device: AnyObject,
 	config: Dictionary<string>,
-): StateV3['local']['apps'] => {
+): StateV3[string]['apps'] => {
 	const userApp = device.belongs_to__application[0];
 	const userAppRelease = getReleaseForDevice(device);
 	return getAppState(device, userApp, userAppRelease, config);
 };
-const getSupervisorAppState = (
-	device: AnyObject,
-	config: Dictionary<string>,
-): StateV3['local']['apps'] => {
+const getSupervisorAppState = (device: AnyObject): StateV3[string]['apps'] => {
 	const supervisorRelease = device.should_be_managed_by__release[0];
 	if (!supervisorRelease) {
 		return {};
 	}
 	const supervisorApp = supervisorRelease.belongs_to__application[0];
-	return getAppState(device, supervisorApp, supervisorRelease, config);
+	// We use an empty config as we don't want any labels applied to the supervisor due to user app config
+	return getAppState(device, supervisorApp, supervisorRelease, {});
 };
