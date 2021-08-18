@@ -1,4 +1,23 @@
 - commits:
+    - subject: Add config to exclude hostApp invalidated releases from /device-types/v1
+      hash: 74b1ac982fb64e2edc4d03f5a3aca33632db1651
+      body: ''
+      footer:
+        Change-type: minor
+        change-type: minor
+        HQ: 'https://jel.ly.fish/1c3fbd90-422e-48b5-8679-ab205c33d6b5'
+        hq: 'https://jel.ly.fish/1c3fbd90-422e-48b5-8679-ab205c33d6b5'
+        See: >-
+          https://www.flowdock.com/app/rulemotion/r-product/threads/wTUG3lGL7ThRp1LnuxQLxe6WJNL
+        see: >-
+          https://www.flowdock.com/app/rulemotion/r-product/threads/wTUG3lGL7ThRp1LnuxQLxe6WJNL
+        Signed-off-by: Thodoris Greasidis <thodoris@balena.io>
+        signed-off-by: Thodoris Greasidis <thodoris@balena.io>
+      author: Thodoris Greasidis
+      nested: []
+  version: 0.151.0
+  date: 2021-08-18T13:11:01.434Z
+- commits:
     - subject: Update open-balena-base to 11.3.9
       hash: 47db7304f9fb464d551a570f3ce80443af354b13
       body: |
