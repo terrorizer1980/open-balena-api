@@ -135,6 +135,15 @@ function buildAppFromRelease(
 		}
 		const svc = si.service[0];
 
+		const dontRunThisService =
+			(svc.service_environment_variable as EnvVarList).find(
+				({ name }) => name === 'xBALENA_DONT_RUN_THIS_SERVICE_THING_THINGY',
+			)?.value === 'true';
+
+		if (dontRunThisService) {
+			return;
+		}
+
 		const environment: Dictionary<string> = {};
 		varListInsert(ipr.image_environment_variable, environment);
 		varListInsert(application.application_environment_variable, environment);
