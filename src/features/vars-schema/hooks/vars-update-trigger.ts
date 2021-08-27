@@ -105,7 +105,6 @@ const addAppEnvHooks = (resource: string) =>
 			};
 		},
 	);
-
 addAppEnvHooks('application_config_variable');
 addAppEnvHooks('application_environment_variable');
 
@@ -138,18 +137,41 @@ const addDeviceEnvHooks = (resource: string) =>
 			};
 		},
 	);
-
 addDeviceEnvHooks('device_config_variable');
 addDeviceEnvHooks('device_environment_variable');
 
-addEnvHooks(
-	'service_environment_variable',
-	async (
-		args: hooks.HookArgs & {
-			tx: Tx;
-		},
-	) => {
-		if (args.req.body.service != null) {
+const addServiceEnvHooks = (resource: string) =>
+	addEnvHooks(
+		resource,
+		async (
+			args: hooks.HookArgs & {
+				tx: Tx;
+			},
+		) => {
+			if (args.req.body.service != null) {
+				return {
+					service_install: {
+						$any: {
+							$alias: 'si',
+							$expr: {
+								si: {
+									service: {
+										$any: {
+											$alias: 's',
+											$expr: { s: { id: args.req.body.service } },
+										},
+									},
+								},
+							},
+						},
+					},
+				};
+			}
+
+			const envVarIds = await sbvrUtils.getAffectedIds(args);
+			if (envVarIds.length === 0) {
+				return;
+			}
 			return {
 				service_install: {
 					$any: {
@@ -159,36 +181,14 @@ addEnvHooks(
 								service: {
 									$any: {
 										$alias: 's',
-										$expr: { s: { id: args.req.body.service } },
-									},
-								},
-							},
-						},
-					},
-				},
-			};
-		}
-
-		const envVarIds = await sbvrUtils.getAffectedIds(args);
-		if (envVarIds.length === 0) {
-			return;
-		}
-		return {
-			service_install: {
-				$any: {
-					$alias: 'si',
-					$expr: {
-						si: {
-							service: {
-								$any: {
-									$alias: 's',
-									$expr: {
-										s: {
-											service_environment_variable: {
-												$any: {
-													$alias: 'e',
-													$expr: {
-														e: { id: { $in: envVarIds } },
+										$expr: {
+											s: {
+												[resource]: {
+													$any: {
+														$alias: 'e',
+														$expr: {
+															e: { id: { $in: envVarIds } },
+														},
 													},
 												},
 											},
@@ -199,61 +199,96 @@ addEnvHooks(
 						},
 					},
 				},
-			},
-		};
-	},
-);
-
-addEnvHooks(
-	'device_service_environment_variable',
-	async (
-		args: hooks.HookArgs & {
-			tx: Tx;
+			};
 		},
-	) => {
-		if (args.req.body.service_install != null) {
+	);
+addServiceEnvHooks('service_environment_variable');
+addServiceEnvHooks('service_config_variable');
+
+const addDeviceServiceEnvHooks = (resource: string) =>
+	addEnvHooks(
+		resource,
+		async (
+			args: hooks.HookArgs & {
+				tx: Tx;
+			},
+		) => {
+			if (args.req.body.service_install != null) {
+				return {
+					service_install: {
+						$any: {
+							$alias: 's',
+							$expr: { s: { id: args.req.body.service_install } },
+						},
+					},
+				};
+			}
+
+			const envVarIds = await sbvrUtils.getAffectedIds(args);
+			if (envVarIds.length === 0) {
+				return;
+			}
 			return {
 				service_install: {
 					$any: {
 						$alias: 's',
-						$expr: { s: { id: args.req.body.service_install } },
-					},
-				},
-			};
-		}
-
-		const envVarIds = await sbvrUtils.getAffectedIds(args);
-		if (envVarIds.length === 0) {
-			return;
-		}
-		return {
-			service_install: {
-				$any: {
-					$alias: 's',
-					$expr: {
-						s: {
-							device_service_environment_variable: {
-								$any: {
-									$alias: 'e',
-									$expr: { e: { id: { $in: envVarIds } } },
+						$expr: {
+							s: {
+								[resource]: {
+									$any: {
+										$alias: 'e',
+										$expr: { e: { id: { $in: envVarIds } } },
+									},
 								},
 							},
 						},
 					},
 				},
-			},
-		};
-	},
-);
-
-addEnvHooks(
-	'image_environment_variable',
-	async (
-		args: hooks.HookArgs & {
-			tx: Tx;
+			};
 		},
-	) => {
-		if (args.req.body.release_image != null) {
+	);
+addDeviceServiceEnvHooks('device_service_environment_variable');
+addDeviceServiceEnvHooks('device_service_config_variable');
+
+const addImageEnvHooks = (resource: string) =>
+	addEnvHooks(
+		resource,
+		async (
+			args: hooks.HookArgs & {
+				tx: Tx;
+			},
+		) => {
+			if (args.req.body.release_image != null) {
+				return {
+					image_install: {
+						$any: {
+							$alias: 'ii',
+							$expr: {
+								installs__image: {
+									$any: {
+										$alias: 'i',
+										$expr: {
+											i: {
+												release_image: {
+													$any: {
+														$alias: 'ri',
+														$expr: { ri: { id: args.req.body.release_image } },
+													},
+												},
+											},
+										},
+									},
+								},
+							},
+						},
+					},
+				};
+			}
+
+			const envVarIds = await sbvrUtils.getAffectedIds(args);
+			if (envVarIds.length === 0) {
+				return;
+			}
 			return {
 				image_install: {
 					$any: {
@@ -267,42 +302,13 @@ addEnvHooks(
 											release_image: {
 												$any: {
 													$alias: 'ri',
-													$expr: { ri: { id: args.req.body.release_image } },
-												},
-											},
-										},
-									},
-								},
-							},
-						},
-					},
-				},
-			};
-		}
-
-		const envVarIds = await sbvrUtils.getAffectedIds(args);
-		if (envVarIds.length === 0) {
-			return;
-		}
-		return {
-			image_install: {
-				$any: {
-					$alias: 'ii',
-					$expr: {
-						installs__image: {
-							$any: {
-								$alias: 'i',
-								$expr: {
-									i: {
-										release_image: {
-											$any: {
-												$alias: 'ri',
-												$expr: {
-													ri: {
-														image_environment_variable: {
-															$any: {
-																$alias: 'e',
-																$expr: { e: { id: { $in: envVarIds } } },
+													$expr: {
+														ri: {
+															[resource]: {
+																$any: {
+																	$alias: 'e',
+																	$expr: { e: { id: { $in: envVarIds } } },
+																},
 															},
 														},
 													},
@@ -315,7 +321,8 @@ addEnvHooks(
 						},
 					},
 				},
-			},
-		};
-	},
-);
+			};
+		},
+	);
+addImageEnvHooks('image_environment_variable');
+addImageEnvHooks('image_config_variable');
