@@ -9,11 +9,12 @@ import {
 import {
 	filterDeviceConfig,
 	formatImageLocation,
+	readTransaction,
 	getReleaseForDevice,
 	serviceInstallFromImage,
 	setMinPollInterval,
 } from '../utils';
-import { sbvrUtils, errors, dbModule } from '@balena/pinejs';
+import { sbvrUtils, errors } from '@balena/pinejs';
 import { events } from '..';
 import { rejectUiConfig, varListInsert } from './state-v3';
 
@@ -355,15 +356,6 @@ export const stateV2: RequestHandler = async (req, res) => {
 		captureException(err, 'Error getting device state', { req });
 		res.status(500).end();
 	}
-};
-
-let readTransaction: dbModule.Database['readTransaction'] = (
-	...args: Parameters<dbModule.Database['readTransaction']>
-) => sbvrUtils.db.readTransaction!(...args);
-export const setReadTransaction = (
-	$readTransaction: dbModule.Database['readTransaction'],
-) => {
-	readTransaction = $readTransaction;
 };
 
 const getDevice = async (req: Request, uuid: string) => {
