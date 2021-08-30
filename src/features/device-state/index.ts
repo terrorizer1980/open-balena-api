@@ -9,7 +9,7 @@ import { stateV2 } from './routes/state-v2';
 import { stateV3 } from './routes/state-v3';
 import { statePatch } from './routes/state-patch';
 
-export { setReadTransaction } from './routes/state';
+export { setReadTransaction } from './utils';
 
 export const setup = (app: Application) => {
 	app.get(
