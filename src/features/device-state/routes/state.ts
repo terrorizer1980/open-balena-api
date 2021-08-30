@@ -135,6 +135,20 @@ function buildAppFromRelease(
 		}
 		const svc = si.service[0];
 
+		const findDontRunVar = (vars: EnvVarList) =>
+			vars.find(
+				({ name }) => name === 'xBALENA_DONT_RUN_THIS_SERVICE_THING_THINGY',
+			);
+		const dontRunVar =
+			findDontRunVar(si.device_service_environment_variable) ??
+			findDontRunVar(svc.service_environment_variable) ??
+			findDontRunVar(ipr.image_environment_variable);
+		const dontRunThisService = dontRunVar?.value === 'true';
+
+		if (dontRunThisService) {
+			return;
+		}
+
 		const environment: Dictionary<string> = {};
 		varListInsert(ipr.image_environment_variable, environment);
 		varListInsert(application.application_environment_variable, environment);
