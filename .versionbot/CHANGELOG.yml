@@ -1,4 +1,15 @@
 - commits:
+    - subject: Trigger updates when image env vars change like for other env vars
+      hash: f354e3ef0a4c8ec943099c1bbda4dfe606de92b2
+      body: ''
+      footer:
+        Change-type: patch
+        change-type: patch
+      author: Pagan Gazzard
+      nested: []
+  version: 0.155.3
+  date: 2021-08-30T17:51:10.979Z
+- commits:
     - subject: Deduplicate env var renaming
       hash: bd9792215cdb9a1039552e0558f31a5cc35b46d4
       body: ''
