@@ -10,6 +10,7 @@ import {
 	filterDeviceConfig,
 	formatImageLocation,
 	getReleaseForDevice,
+	readTransaction,
 	serviceInstallFromImage,
 	setMinPollInterval,
 } from '../utils';
@@ -365,7 +366,7 @@ export const stateV3: RequestHandler = async (req, res) => {
 };
 
 const getDevice = async (req: Request, uuid: string) => {
-	const device = await sbvrUtils.db.readTransaction!((tx) =>
+	const device = await readTransaction((tx) =>
 		stateQuery()({ uuid }, undefined, { req, tx }),
 	);
 
