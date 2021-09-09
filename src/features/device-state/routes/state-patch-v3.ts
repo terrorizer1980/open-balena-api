@@ -16,6 +16,7 @@ import {
 	Release,
 } from '../../../balena-model';
 import { deleteOldImageInstalls, upsertImageInstall } from './state-patch-v2';
+import type { Filter } from 'pinejs-client-core';
 
 const { BadRequestError, UnauthorizedError, InternalRequestError } = errors;
 const { api } = sbvrUtils;
@@ -186,9 +187,14 @@ export const statePatchV3: RequestHandler = async (req, res) => {
 					resource: 'image',
 					options: {
 						$select: ['id', 'is_stored_at__image_location'],
-						$filter: {
-							is_stored_at__image_location: { $in: imageLocations },
-						},
+						$filter: imageLocations.map((imgLocation) => {
+							const [location, contentHash] = imgLocation.split('@');
+							const filter: Filter = { is_stored_at__image_location: location };
+							if (contentHash) {
+								filter.content_hash = contentHash;
+							}
+							return filter;
+						}),
 					},
 				})) as Array<Pick<Image, 'id' | 'is_stored_at__image_location'>>;
 				if (imageLocations.length !== images.length) {
@@ -296,7 +302,9 @@ export const statePatchV3: RequestHandler = async (req, res) => {
 							}
 							for (const service of Object.values(services)) {
 								const image = images.find(
-									(i) => i.is_stored_at__image_location === service.image,
+									(i) =>
+										i.is_stored_at__image_location ===
+										service.image.split('@', 1)[0],
 								);
 								if (image == null) {
 									throw new InternalRequestError();
