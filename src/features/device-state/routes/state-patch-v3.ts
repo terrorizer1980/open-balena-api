@@ -203,23 +203,26 @@ export const statePatchV3: RequestHandler = async (req, res) => {
 			}
 
 			for (const [appUuid, releaseUuids] of Object.entries(appReleaseUuids)) {
-				appReleases[appUuid] = (await resinApiTx.get({
-					resource: 'release',
-					options: {
-						$select: ['id', 'commit'],
-						$filter: {
-							commit: { $in: Array.from(releaseUuids) },
-							belongs_to__application: {
-								$any: {
-									$alias: 'a',
-									$expr: {
-										a: { uuid: appUuid },
+				appReleases[appUuid] =
+					releaseUuids.size === 0
+						? []
+						: ((await resinApiTx.get({
+								resource: 'release',
+								options: {
+									$select: ['id', 'commit'],
+									$filter: {
+										commit: { $in: Array.from(releaseUuids) },
+										belongs_to__application: {
+											$any: {
+												$alias: 'a',
+												$expr: {
+													a: { uuid: appUuid },
+												},
+											},
+										},
 									},
 								},
-							},
-						},
-					},
-				})) as Array<Pick<Release, 'id' | 'commit'>>;
+						  })) as Array<Pick<Release, 'id' | 'commit'>>);
 				if (appReleases[appUuid].length !== releaseUuids.size) {
 					throw new UnauthorizedError();
 				}
