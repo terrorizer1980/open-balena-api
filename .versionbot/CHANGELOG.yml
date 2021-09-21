@@ -1,4 +1,15 @@
 - commits:
+    - subject: Add v3 state-get endpoint
+      hash: ec643cef91068f2cb9ecaeb2505364509589ea8a
+      body: ''
+      footer:
+        Change-type: patch
+        change-type: patch
+      author: Pagan Gazzard
+      nested: []
+  version: 0.157.4
+  date: 2021-09-21T13:07:36.124Z
+- commits:
     - subject: Add support for modelling multi-container host OS apps and blocks
       hash: 0ad8d982e1d78b6e397378578323b8545d8a69e9
       body: ''
