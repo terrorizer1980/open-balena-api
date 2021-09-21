@@ -52,6 +52,7 @@ export type StateV3 = {
 				 */
 				id: number;
 				name: string;
+				class: 'fleet' | 'block' | 'app';
 				parent_app?: string;
 				is_host?: boolean;
 				releases?: {
@@ -266,7 +267,7 @@ const deviceExpand: Expand = {
 		},
 	},
 	belongs_to__application: {
-		$select: ['id', 'uuid', 'app_name', 'is_host'],
+		$select: ['id', 'uuid', 'app_name', 'is_host', 'is_of__class'],
 		$expand: {
 			...appExpand,
 			application_config_variable: {
@@ -283,7 +284,7 @@ const deviceExpand: Expand = {
 		$expand: {
 			...releaseExpand.$expand,
 			belongs_to__application: {
-				$select: ['id', 'uuid', 'app_name', 'is_host'],
+				$select: ['id', 'uuid', 'app_name', 'is_host', 'is_of__class'],
 				$expand: appExpand,
 			},
 		},
@@ -412,6 +413,7 @@ const getAppState = (
 				id: application.id,
 				name: application.app_name,
 				is_host: application.is_host,
+				class: application.is_of__class,
 			},
 		),
 	};
