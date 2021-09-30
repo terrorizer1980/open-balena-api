@@ -1,4 +1,15 @@
 - commits:
+    - subject: Avoid unnecessary conversions of buffers to strings in redis based logs
+      hash: 7812f1cabfaaecf43035ceabc3a241ba4b8836e6
+      body: ''
+      footer:
+        Change-type: patch
+        change-type: patch
+      author: Pagan Gazzard
+      nested: []
+  version: 0.157.9
+  date: 2021-09-30T17:11:39.919Z
+- commits:
     - subject: Add npm command to generate the sql schema
       hash: 2c8a6c3328ccb18089057f324491e55a31a8b747
       body: ''
