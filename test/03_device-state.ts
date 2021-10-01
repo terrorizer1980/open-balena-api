@@ -9,6 +9,7 @@ import { version } from './test-lib/versions';
 import sinon = require('sinon');
 import configMock = require('../src/lib/config');
 import * as stateMock from '../src/features/device-heartbeat';
+import { waitFor as $waitFor } from './test-lib/common';
 import * as fixtures from './test-lib/fixtures';
 
 const POLL_MSEC = 2000;
@@ -49,17 +50,11 @@ mockery.registerMock('../src/lib/config', configMock);
 mockery.registerMock('../src/lib/device-online-state', stateMock);
 
 const waitFor = async (fn: () => boolean, timeout: number = 10000) => {
-	let testLimit = Math.max(timeout, 50) / 50;
-	let result = fn();
-	while (!result && testLimit > 0) {
-		await Bluebird.delay(50);
-		testLimit--;
-		result = fn();
-	}
-
-	if (!result) {
-		throw new Error('Timeout waiting for result');
-	}
+	await $waitFor({
+		delayMs: 50,
+		maxCount: Math.max(timeout, 50) / 50,
+		checkFn: fn,
+	});
 };
 
 describe('Device State v2', () => {

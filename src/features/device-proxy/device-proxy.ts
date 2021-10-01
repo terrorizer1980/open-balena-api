@@ -193,16 +193,15 @@ export async function requestDevices({
 			resource: 'device',
 			options: {
 				$select: 'id',
-				$filter: filter,
-				// $filter: {
-				// 	$and: [
-				// 		{
-				// 			is_connected_to_vpn: true,
-				// 			vpn_address: { $ne: null },
-				// 		},
-				// 		filter,
-				// 	],
-				// },
+				$filter: {
+					$and: [
+						{
+							is_connected_to_vpn: true,
+							vpn_address: { $ne: null },
+						},
+						filter,
+					],
+				},
 				$orderby: { id: 'asc' },
 			},
 		})) as Array<Pick<Device, 'id'>>
@@ -215,47 +214,14 @@ export async function requestDevices({
 		throw new NotFoundError('No online device(s) found');
 	}
 	if (method !== 'GET') {
-		console.log('*** device/canAccess');
-		const res = (await resinApi
-			.post({
-				url: `device/canAccess?$filter=id in (${deviceIds})`,
-				// resource: `device/canAccess`,
-				// options: {
-				// 	$filter: { id: { $in: deviceIds } },
-				// },
-				body: { action: 'update' },
-			})
-			.catch((err) => {
-				console.log(err);
-				throw err;
-			})) as { d?: Array<{ id: number }> };
-		console.log(
-			'*** device/canAccess returned deviceIds',
-			res?.d?.[0],
-			deviceIds,
-		);
+		const res = (await resinApi.post({
+			url: `device/canAccess?$filter=id in (${deviceIds})`,
+			body: { action: 'update' },
+		})) as { d?: Array<{ id: number }> };
 		if (_.isEqual(res?.d?.[0], deviceIds)) {
 			throw new errors.ForbiddenError();
 		}
 	}
-	// if (method !== 'GET') {
-	// 	console.log('*********************')
-	// 	await Promise.all(
-	// 		deviceIds.map(async (deviceId) => {
-	// 			const res = (await resinApi.post({
-	// 				url: `device(${deviceId})/canAccess?$filter=id in (${deviceId})`,
-	// 				// options: {
-	// 				// 	$filter: { id: { $in: [deviceId] } }
-	// 				// },
-	// 				body: { action: 'update' },
-	// 			})) as { d?: Array<{ id: number }> };
-
-	// 			if (res?.d?.[0]?.id !== deviceId) {
-	// 				throw new errors.ForbiddenError();
-	// 			}
-	// 		}),
-	// 	);
-	// }
 	// And now fetch device data with full privs
 	const devices = await api.resin.get({
 		resource: 'device',
