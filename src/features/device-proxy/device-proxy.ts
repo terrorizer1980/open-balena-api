@@ -218,17 +218,22 @@ export async function requestDevices({
 		console.log('*** device/canAccess');
 		const res = (await resinApi
 			.post({
-				resource: `device/canAccess`,
-				options: {
-					$filter: { id: { $in: deviceIds } },
-				},
+				url: `device/canAccess?$filter=id in (${deviceIds})`,
+				// resource: `device/canAccess`,
+				// options: {
+				// 	$filter: { id: { $in: deviceIds } },
+				// },
 				body: { action: 'update' },
 			})
 			.catch((err) => {
 				console.log(err);
 				throw err;
 			})) as { d?: Array<{ id: number }> };
-		console.log('*** ', res?.d?.[0], deviceIds);
+		console.log(
+			'*** device/canAccess returned deviceIds',
+			res?.d?.[0],
+			deviceIds,
+		);
 		if (_.isEqual(res?.d?.[0], deviceIds)) {
 			throw new errors.ForbiddenError();
 		}
