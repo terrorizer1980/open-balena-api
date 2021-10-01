@@ -202,6 +202,7 @@ export async function requestDevices({
 						filter,
 					],
 				},
+				$orderby: { id: 'asc' },
 			},
 		})) as Array<Pick<Device, 'id'>>
 	).map(({ id }) => id);
@@ -213,18 +214,13 @@ export async function requestDevices({
 		throw new NotFoundError('No online device(s) found');
 	}
 	if (method !== 'GET') {
-		await Promise.all(
-			deviceIds.map(async (deviceId) => {
-				const res = (await resinApi.post({
-					url: `device(${deviceId})/canAccess`,
-					body: { action: 'update' },
-				})) as { d?: Array<{ id: number }> };
-
-				if (res?.d?.[0]?.id !== deviceId) {
-					throw new errors.ForbiddenError();
-				}
-			}),
-		);
+		const res = (await resinApi.post({
+			url: `device/canAccess?$filter=id in (${deviceIds})`,
+			body: { action: 'update' },
+		})) as { d?: Array<{ id: number }> };
+		if (_.isEqual(res?.d?.[0], deviceIds)) {
+			throw new errors.ForbiddenError();
+		}
 	}
 	// And now fetch device data with full privs
 	const devices = await api.resin.get({
