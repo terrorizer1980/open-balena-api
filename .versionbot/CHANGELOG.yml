@@ -1,4 +1,19 @@
 - commits:
+    - subject: Add a generic relationship aliasing helper
+      hash: 62e6975010a6a207bff6040d69a535b7ceb28b64
+      body: ''
+      footer:
+        Change-type: minor
+        change-type: minor
+        See: 'https://github.com/balena-io/balena-api/issues/3150'
+        see: 'https://github.com/balena-io/balena-api/issues/3150'
+        Signed-off-by: Thodoris Greasidis <thodoris@balena.io>
+        signed-off-by: Thodoris Greasidis <thodoris@balena.io>
+      author: Thodoris Greasidis
+      nested: []
+  version: 0.158.0
+  date: 2021-10-05T08:22:59.437Z
+- commits:
     - subject: 'device-proxy: Skip canAccess check for internal root operations'
       hash: e7686f7c20f23a4babf41ae0326708514325cac4
       body: ''
