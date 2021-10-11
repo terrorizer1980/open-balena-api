@@ -183,18 +183,22 @@ export const statePatchV3: RequestHandler = async (req, res) => {
 			}
 
 			if (imageLocations.length > 0) {
+				const imgLocationFilter = imageLocations.map((imgLocation) => {
+					const [location, contentHash] = imgLocation.split('@');
+					const filter: Filter = { is_stored_at__image_location: location };
+					if (contentHash) {
+						filter.content_hash = contentHash;
+					}
+					return filter;
+				});
 				images = (await resinApiTx.get({
 					resource: 'image',
 					options: {
 						$select: ['id', 'is_stored_at__image_location'],
-						$filter: imageLocations.map((imgLocation) => {
-							const [location, contentHash] = imgLocation.split('@');
-							const filter: Filter = { is_stored_at__image_location: location };
-							if (contentHash) {
-								filter.content_hash = contentHash;
-							}
-							return filter;
-						}),
+						$filter:
+							imgLocationFilter.length === 1
+								? imgLocationFilter[0]
+								: imgLocationFilter,
 					},
 				})) as Array<Pick<Image, 'id' | 'is_stored_at__image_location'>>;
 				if (imageLocations.length !== images.length) {
