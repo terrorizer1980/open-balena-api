@@ -1,4 +1,23 @@
 - commits:
+    - subject: 'WIP: state-patch'
+      hash: 69344606f32d79294b990657c63e507273504231
+      body: ''
+      footer:
+        Change-type: patch
+        change-type: patch
+      author: Pagan Gazzard
+      nested: []
+    - subject: Add v3 state-get endpoint
+      hash: cfe8e6f4cb3f0c5299a79f1e698ef3f18ba01507
+      body: ''
+      footer:
+        Change-type: patch
+        change-type: patch
+      author: Pagan Gazzard
+      nested: []
+  version: 0.158.2
+  date: 2021-10-11T13:59:13.395Z
+- commits:
     - subject: 'vars-update-trigger: Get the affected devices in POSTRUN when possible'
       hash: b9f2096745dad513350639a879a573d28030e79c
       body: ''
