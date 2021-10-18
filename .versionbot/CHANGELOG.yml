@@ -1,4 +1,409 @@
 - commits:
+    - subject: Add an index to optimize device api key permissions lookups
+      hash: c12912294eec02eac85aa892f2bc2632b7cbba7a
+      body: ''
+      footer:
+        Change-type: patch
+        change-type: patch
+      author: Pagan Gazzard
+      nested: []
+  version: 0.159.11
+  date: 2021-10-18T18:27:52.679Z
+- commits:
+    - subject: Add an `onLogReadStreamInitialized` hook
+      hash: 18442509e8fcf09291bd4643f12764d34f31fabf
+      body: ''
+      footer:
+        Change-type: patch
+        change-type: patch
+      author: Pagan Gazzard
+      nested: []
+  version: 0.159.10
+  date: 2021-10-18T14:37:38.962Z
+- commits:
+    - subject: Update open-balena-base to 12.2.0
+      hash: 5ad6cf706ede64f0022f23eecbe05c5774ad7129
+      body: |
+        Update open-balena-base from 12.0.2 to 12.2.0
+      footer:
+        Change-type: patch
+        change-type: patch
+      author: Pagan Gazzard
+      nested:
+        - commits:
+            - subject: Update nodejs to 14.18.1 and npm to 6.14.15
+              hash: 613f0a4462227bc8dc2bb16aa91b3306c1c87b16
+              body: ''
+              footer:
+                Change-type: minor
+                change-type: minor
+              author: Pagan Gazzard
+              nested: []
+          version: open-balena-base-12.2.0
+          date: 2021-10-18T10:48:20.444Z
+        - commits:
+            - subject: >-
+                Simplify config by baking the device UUID into the DNS_TLD if
+                available
+              hash: 140aaf311c000963c51f3304a04221d386209c5a
+              body: ''
+              footer:
+                Change-type: patch
+                change-type: patch
+              author: Akis Kesoglou
+              nested: []
+            - subject: Fix configuration for non-BoB deployments
+              hash: be5d9722d47b65ca511cfb66ab13ed1f3ddff372
+              body: >
+                The default value on the BALENA_DEVICE_UUID variable forced all
+                code paths that used to run optionally depending on whether
+                deployment was on a balenaOS device to run.
+              footer:
+                Change-type: patch
+                change-type: patch
+              author: Akis Kesoglou
+              nested: []
+          version: open-balena-base-12.1.1
+          date: 2021-10-14T11:28:26.606Z
+        - commits:
+            - subject: Auto-configure balenaMachine(bob)
+              hash: efb8da155b7bedec44558dfcd55cb6b535099c01
+              body: >
+                + allows balenaMachine(s)/BoB(s) to automatically configure
+                itself (without bob-cli)
+
+                + auto-configuration requires balena-ca and cert-manager to do
+                the heavy lifting prior
+
+                + corresponding [balena-on-balena
+                PR](https://github.com/balena-io/balena-on-balena/pull/261)
+
+
+                * refactor confd.service to include both root-ca and
+                host-envvars handling
+
+                * add systemd path watcher to restart confd if keys/certs change
+                during runtime
+
+                * store stack configuration available to all services in a
+                persistent/shared volume (/balena)
+
+                * change resolver order to dns => mdns (ipv4) => mdns (ipv6) =>
+                return
+
+                * configure API key and JOSE/JWT key id
+
+                * configure open-balena-vpn (PKI) environment variables
+
+                * configure Sentry DSNs
+
+                * configure API keys/tokens
+
+                * configure proxy and devices SSH keys
+
+                * bundle Git SSH keys
+
+                * refactor environment handling in non-systemd variant
+
+                * deprecate BALENA_ prefixes from confd
+              footer:
+                Change-type: minor
+                change-type: minor
+                Co-authored-by: dfunckt <dfunckt@users.noreply.github.com>
+                co-authored-by: dfunckt <dfunckt@users.noreply.github.com>
+              author: ab77
+              nested: []
+          version: open-balena-base-12.1.0
+          date: 2021-09-24T16:30:37.661Z
+        - commits:
+            - subject: Attempt to load root CA certificate bundle from file
+              hash: 493bb446e99fc7a5b6ecaa4e796942aa65ad03d0
+              body: >
+                * allows dynamic certificate generation and loading within the
+                stack
+
+                * if a (volume|directory) /certs exists, set up a notification
+                to watch
+                  for /certs/ca-bundle.pem and update CA certificates/restart confd
+              footer:
+                Change-type: patch
+                change-type: patch
+              author: ab77
+              nested: []
+          version: open-balena-base-12.0.3
+          date: 2021-09-01T21:12:04.483Z
+  version: 0.159.9
+  date: 2021-10-18T13:56:29.114Z
+- commits:
+    - subject: Add an `onLogWriteStreamInitialized` hook
+      hash: d44bf08a89ae9e0179b60030c915fb9447ce8208
+      body: ''
+      footer:
+        Change-type: patch
+        change-type: patch
+      author: Pagan Gazzard
+      nested: []
+  version: 0.159.8
+  date: 2021-10-18T13:36:39.219Z
+- commits:
+    - subject: Add caching of `UnauthorizedError`s for the VPN auth cache
+      hash: 81f6eb264dc7f4fcfae58f652eebd5653bd8e7ad
+      body: ''
+      footer:
+        Change-type: patch
+        change-type: patch
+      author: Pagan Gazzard
+      nested: []
+  version: 0.159.7
+  date: 2021-10-15T17:04:39.139Z
+- commits:
+    - subject: Expose the ability to remove individual entries from the cache
+      hash: 90ad0a018548a58f610859e388d2f50365856d7f
+      body: ''
+      footer:
+        Change-type: patch
+        change-type: patch
+      author: Pagan Gazzard
+      nested: []
+  version: 0.159.6
+  date: 2021-10-15T12:45:19.730Z
+- commits:
+    - subject: Avoid deep imports into pinejs
+      hash: bc0f0ea4f6ec44e39cfbd1816e3af8407a045d8e
+      body: ''
+      footer:
+        Change-type: patch
+        change-type: patch
+      author: Pagan Gazzard
+      nested: []
+  version: 0.159.5
+  date: 2021-10-14T17:36:08.811Z
+- commits:
+    - subject: Update dependencies
+      hash: 09e321f1d05961d53932b09190be06e9d764f6af
+      body: |
+        Update pinejs from 14.30.3 to 14.33.0
+      footer:
+        Change-type: patch
+        change-type: patch
+      author: Pagan Gazzard
+      nested:
+        - commits:
+            - subject: Add the ability to enable caching of api key permissions
+              hash: a2fe4c9061aa20c2bf53693e27876ea5ab897254
+              body: ''
+              footer:
+                Change-type: minor
+                change-type: minor
+              author: Pagan Gazzard
+              nested: []
+            - subject: Add the ability to enable caching of user permissions
+              hash: 3e7991469eecbc627defce4664e8c0a34f139fa0
+              body: ''
+              footer:
+                Change-type: minor
+                change-type: minor
+              author: Pagan Gazzard
+              nested: []
+          version: pinejs-14.33.0
+          date: 2021-10-14T16:30:28.431Z
+        - commits:
+            - subject: >-
+                Allow passing a function as the cache params to enable custom
+                caching
+              hash: 3e790d9961a0d7f666021248668241264b453743
+              body: |
+                This allows using a different cache than the default of memoizee
+              footer:
+                Change-type: minor
+                change-type: minor
+              author: Pagan Gazzard
+              nested: []
+          version: pinejs-14.32.0
+          date: 2021-10-14T16:13:19.016Z
+        - commits:
+            - subject: >-
+                Add the postgres pool error handler even when no PG_SCHEMA is
+                specified
+              hash: 6d4a75e69910ab27cb1a8096a30776da4173d6ca
+              body: ''
+              footer:
+                Change-type: patch
+                change-type: patch
+              author: Pagan Gazzard
+              nested: []
+          version: pinejs-14.31.2
+          date: 2021-10-05T15:23:45.569Z
+        - commits:
+            - subject: More usage of nullish coalescing
+              hash: ef543e12309224e97b126b33d4c78521b2a883a9
+              body: ''
+              footer:
+                Change-type: patch
+                change-type: patch
+              author: Pagan Gazzard
+              nested: []
+          version: pinejs-14.31.1
+          date: 2021-09-30T15:03:08.673Z
+        - commits:
+            - subject: >-
+                Add support for a `PINEJS_DEBUG` env var that is more strictly
+                checked
+              hash: 4b591eefae812a10f43d98e440d11bbfdded69c0
+              body: >
+                This means we can warn on/ignore invalid values rather than
+                giving a
+
+                potentially surprising result, eg `'0'` being truthy
+              footer:
+                Change-type: minor
+                change-type: minor
+              author: Pagan Gazzard
+              nested: []
+          version: pinejs-14.31.0
+          date: 2021-09-29T17:05:19.795Z
+        - commits:
+            - subject: >-
+                Avoid creating a new readOnlyArgs object when args is already
+                read-only
+              hash: e0eed7914ac621a58dc0a78a9a63b00b69076753
+              body: ''
+              footer:
+                Change-type: patch
+                change-type: patch
+              author: Pagan Gazzard
+              nested: []
+          version: pinejs-14.30.4
+          date: 2021-09-29T14:58:29.987Z
+  version: 0.159.4
+  date: 2021-10-14T17:09:49.592Z
+- commits:
+    - subject: Change image install index to only look at download progress existence
+      hash: 5c84c2e5c60f09ee2a20fbea17c56ee2c64ee739
+      body: ''
+      footer:
+        Change-type: patch
+        change-type: patch
+      author: Pagan Gazzard
+      nested: []
+  version: 0.159.3
+  date: 2021-10-13T19:19:38.271Z
+- commits:
+    - subject: Drop duplicate image install index
+      hash: 39108eb8f59cc77ee4a7bd7dfcb9e5b4895a5458
+      body: ''
+      footer:
+        Change-type: patch
+        change-type: patch
+        Signed-off-by: Thodoris Greasidis <thodoris@balena.io>
+        signed-off-by: Thodoris Greasidis <thodoris@balena.io>
+      author: Thodoris Greasidis
+      nested: []
+  version: 0.159.2
+  date: 2021-10-12T20:26:29.636Z
+- commits:
+    - subject: Add an index to optimize overall status computed fact type
+      hash: 092c4be520c63695e242cdadc3b0a6bce027b19a
+      body: ''
+      footer:
+        Change-type: patch
+        change-type: patch
+      author: Pagan Gazzard
+      nested: []
+  version: 0.159.1
+  date: 2021-10-12T19:57:28.721Z
+- commits:
+    - subject: Add a cache for vpn auth requests
+      hash: cfe84cd2303a88260f4c6f712f45fe87812796a0
+      body: ''
+      footer:
+        Change-type: minor
+        change-type: minor
+      author: Pagan Gazzard
+      nested: []
+  version: 0.159.0
+  date: 2021-10-12T17:17:44.002Z
+- commits:
+    - subject: 'vars-update-trigger: Get the affected devices in POSTRUN when possible'
+      hash: b9f2096745dad513350639a879a573d28030e79c
+      body: ''
+      footer:
+        Change-type: patch
+        change-type: patch
+        See: 'https://github.com/balena-io/balena-api/issues/3338'
+        see: 'https://github.com/balena-io/balena-api/issues/3338'
+        Signed-off-by: Thodoris Greasidis <thodoris@balena.io>
+        signed-off-by: Thodoris Greasidis <thodoris@balena.io>
+      author: Thodoris Greasidis
+      nested: []
+  version: 0.158.1
+  date: 2021-10-11T10:55:25.671Z
+- commits:
+    - subject: Add release known_issue property
+      hash: 50e26210f865a772f4b203a4a10b6850d9fdf705
+      body: |
+        Add release known_issue property
+      footer:
+        Change-type: minor
+        change-type: minor
+        Signed-off-by: Andrea Rosci <andrear@balena.io>
+        signed-off-by: Andrea Rosci <andrear@balena.io>
+      author: JSReds
+      nested: []
+  version: 0.158.0
+  date: 2021-10-06T11:36:39.175Z
+- commits:
+    - subject: 'device-proxy: Skip canAccess check for internal root operations'
+      hash: e7686f7c20f23a4babf41ae0326708514325cac4
+      body: ''
+      footer:
+        Change-type: patch
+        change-type: patch
+        See: >-
+          https://www.flowdock.com/app/rulemotion/resin-devops/threads/7eWUlj4x8HU0fxhBOFmvOe3gxjw
+        see: >-
+          https://www.flowdock.com/app/rulemotion/resin-devops/threads/7eWUlj4x8HU0fxhBOFmvOe3gxjw
+        Signed-off-by: Thodoris Greasidis <thodoris@balena.io>
+        signed-off-by: Thodoris Greasidis <thodoris@balena.io>
+      author: Thodoris Greasidis
+      nested: []
+    - subject: Test that changing the fleet target release triggers a device update
+      hash: fd4528d55480ab7ede80c029e56ea4c854f0c954
+      body: ''
+      footer:
+        Change-type: patch
+        change-type: patch
+        Signed-off-by: Thodoris Greasidis <thodoris@balena.io>
+        signed-off-by: Thodoris Greasidis <thodoris@balena.io>
+      author: Thodoris Greasidis
+      nested: []
+  version: 0.157.9
+  date: 2021-10-01T16:04:45.990Z
+- commits:
+    - subject: Add npm command to generate the sql schema
+      hash: 2c8a6c3328ccb18089057f324491e55a31a8b747
+      body: ''
+      footer:
+        Change-type: patch
+        change-type: patch
+        Signed-off-by: Thodoris Greasidis <thodoris@balena.io>
+        signed-off-by: Thodoris Greasidis <thodoris@balena.io>
+      author: Thodoris Greasidis
+      nested: []
+  version: 0.157.8
+  date: 2021-09-29T11:53:31.300Z
+- commits:
+    - subject: Fix check if publish is already scheduled
+      hash: 767d6013c323383616a3ef41cd597b34c6895632
+      body: ''
+      footer:
+        Change-type: patch
+        change-type: patch
+      author: Pagan Gazzard
+      nested: []
+  version: 0.157.7
+  date: 2021-09-22T17:46:55.056Z
+- commits:
     - subject: Only schedule publishing logs when we have some in the buffer
       hash: 861483540cc9a5e0223e0d5d43162fcfcd674440
       body: |

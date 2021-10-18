@@ -101,9 +101,8 @@ ON "image install" ("is provided by-release");
 -- Also optimizes for device state query
 CREATE INDEX IF NOT EXISTS "image_install_image_device_idx"
 ON "image install" ("installs-image", "device");
--- Also optimizes for device state query
-CREATE INDEX IF NOT EXISTS "image_install_device_image_idx"
-ON "image install" ("device", "installs-image");
+
+-- "image install" ("device", "installs-image") exists in an automated unique index
 
 -- "image-is part of-release"."image" is the first part of an automated unique index
 -- Also optimizes device state query
@@ -172,3 +171,11 @@ ON "release" ("id", "belongs to-application");
 -- Optimization for the app-semver-revision uniqueness rule and for computing the next revision
 CREATE INDEX IF NOT EXISTS "release_belongs_to_app_revision_semver_idx"
 ON "release" ("belongs to-application", "revision", "semver major", "semver minor", "semver patch");
+
+-- Optimize the overall status computed fact type
+CREATE INDEX IF NOT EXISTS "image_install_status_dl_progress_exists_device_idx"
+ON "image install" ("status", ("download progress" IS NOT NULL), "device");
+
+-- Optimizes device api key permission lookups that check both the device actor and application, particularly noticeable for the device state endpoint
+CREATE INDEX IF NOT EXISTS "device_application_actor_idx"
+ON "device" ("belongs to-application", "actor");

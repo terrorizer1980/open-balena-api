@@ -7,6 +7,7 @@ import {
 import { apiKeyMiddleware, authorizedMiddleware } from '../../infra/auth';
 import { read } from './lib/read';
 import { store, storeStream } from './lib/store';
+import { SetupOptions } from '../..';
 
 // Rate limit for device log creation, a maximum of 15 batches every 10 second window
 const deviceLogsRateLimiter = createRateLimitMiddleware(
@@ -20,13 +21,25 @@ const deviceLogsRateLimiter = createRateLimitMiddleware(
 	},
 );
 
-export const setup = (app: Application) => {
-	app.get('/device/v2/:uuid/logs', authorizedMiddleware, read);
+export const setup = (
+	app: Application,
+	onLogWriteStreamInitialized: SetupOptions['onLogWriteStreamInitialized'],
+	onLogReadStreamInitialized: SetupOptions['onLogReadStreamInitialized'],
+) => {
+	app.get(
+		'/device/v2/:uuid/logs',
+		authorizedMiddleware,
+		read(onLogReadStreamInitialized),
+	);
 	app.post(
 		'/device/v2/:uuid/logs',
 		deviceLogsRateLimiter('params.uuid'),
 		apiKeyMiddleware,
 		store,
 	);
-	app.post('/device/v2/:uuid/log-stream', apiKeyMiddleware, storeStream);
+	app.post(
+		'/device/v2/:uuid/log-stream',
+		apiKeyMiddleware,
+		storeStream(onLogWriteStreamInitialized),
+	);
 };

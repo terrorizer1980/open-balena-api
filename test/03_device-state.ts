@@ -9,7 +9,9 @@ import { version } from './test-lib/versions';
 import sinon = require('sinon');
 import configMock = require('../src/lib/config');
 import * as stateMock from '../src/features/device-heartbeat';
+import { waitFor } from './test-lib/common';
 import * as fixtures from './test-lib/fixtures';
+import _ = require('lodash');
 
 const POLL_MSEC = 2000;
 const TIMEOUT_SEC = 1;
@@ -47,20 +49,6 @@ stateMock.getInstance()['updateDeviceModel'] = function (
 // register the mocks...
 mockery.registerMock('../src/lib/config', configMock);
 mockery.registerMock('../src/lib/device-online-state', stateMock);
-
-const waitFor = async (fn: () => boolean, timeout: number = 10000) => {
-	let testLimit = Math.max(timeout, 50) / 50;
-	let result = fn();
-	while (!result && testLimit > 0) {
-		await Bluebird.delay(50);
-		testLimit--;
-		result = fn();
-	}
-
-	if (!result) {
-		throw new Error('Timeout waiting for result');
-	}
-};
 
 describe('Device State v2', () => {
 	let fx: fixtures.Fixtures;
@@ -187,7 +175,7 @@ describe('Device State v2', () => {
 				const statsEventSpy = sinon.spy();
 				stateMock.getInstance().on('stats', statsEventSpy);
 
-				await waitFor(() => statsEventSpy.callCount >= 3);
+				await waitFor({ checkFn: () => statsEventSpy.callCount >= 3 });
 
 				stateMock.getInstance().off('stats', statsEventSpy);
 			});
@@ -229,7 +217,7 @@ describe('Device State v2', () => {
 							await getStateV2();
 
 							if (heartbeatAfterGet !== DeviceOnlineStates.Unknown) {
-								await waitFor(() => stateChangeEventSpy.called);
+								await waitFor({ checkFn: () => stateChangeEventSpy.called });
 							} else {
 								await Bluebird.delay(1000);
 								expect(stateChangeEventSpy.called).to.be.false;
@@ -263,7 +251,7 @@ describe('Device State v2', () => {
 							stateChangeEventSpy.resetHistory();
 							await Bluebird.delay(devicePollInterval);
 
-							await waitFor(() => stateChangeEventSpy.called);
+							await waitFor({ checkFn: () => stateChangeEventSpy.called });
 
 							expect(tracker.states[getDevice().uuid]).to.equal(
 								DeviceOnlineStates.Timeout,
@@ -286,7 +274,7 @@ describe('Device State v2', () => {
 
 							await getStateV2();
 
-							await waitFor(() => stateChangeEventSpy.called);
+							await waitFor({ checkFn: () => stateChangeEventSpy.called });
 
 							expect(tracker.states[getDevice().uuid]).to.equal(
 								DeviceOnlineStates.Online,
@@ -312,7 +300,7 @@ describe('Device State v2', () => {
 							await Bluebird.delay(devicePollInterval + TIMEOUT_SEC * 1000);
 
 							// it will be called for TIMEOUT and OFFLINE...
-							await waitFor(() => stateChangeEventSpy.calledTwice);
+							await waitFor({ checkFn: () => stateChangeEventSpy.calledTwice });
 
 							expect(tracker.states[getDevice().uuid]).to.equal(
 								DeviceOnlineStates.Offline,
@@ -405,5 +393,101 @@ describe('Device State v2 patch', function () {
 				);
 			},
 		);
+	});
+});
+
+describe('Device Filters', () => {
+	let fx: fixtures.Fixtures;
+	let admin: UserObjectParam;
+	let applicationId: number;
+	let testTimes: any;
+
+	before(async () => {
+		fx = await fixtures.load('03-device-state');
+
+		admin = fx.users.admin;
+		applicationId = fx.applications.app1.id;
+
+		// create a new device in this test application...
+		await fakeDevice.provisionDevice(admin, applicationId);
+		await new Promise((resolve) => setTimeout(resolve, 1000));
+		await fakeDevice.provisionDevice(admin, applicationId);
+		await new Promise((resolve) => setTimeout(resolve, 1000));
+		await fakeDevice.provisionDevice(admin, applicationId);
+		await new Promise((resolve) => setTimeout(resolve, 1000));
+		await fakeDevice.provisionDevice(admin, applicationId);
+
+		const { body } = await supertest(admin)
+			.get(`/${version}/device`)
+			.expect(200);
+
+		testTimes = body.d.map((entry: any) => _.pick(entry, ['id', 'created_at']));
+
+		testTimes = _.orderBy(testTimes, ['created_at'], ['asc']);
+
+		console.log(JSON.stringify(testTimes));
+	});
+
+	after(async () => {
+		await fixtures.clean(fx);
+		mockery.deregisterMock('../src/lib/env-vars');
+		mockery.deregisterMock('../src/lib/config');
+		mockery.deregisterMock('../src/lib/device-online-state');
+	});
+
+	describe('Device Filters on created_at', () => {
+		it('Should see all devices ', async () => {
+			const { body } = await supertest(admin)
+				.get(`/${version}/device`)
+				.expect(200);
+			expect(body.d).to.be.an('array').to.have.lengthOf(4);
+		});
+
+		it('Should filter devices with created_at greater than first ', async () => {
+			const querystring = `$orderby=created_at asc&$filter=created_at gt datetime'${testTimes[0].created_at}'`;
+
+			const { body } = await supertest(admin)
+				.get(`/${version}/device?${querystring}`)
+				.expect(200);
+
+			expect(body.d).to.be.an('array').to.have.lengthOf(3);
+			expect(_.find(body.d, { created_at: testTimes[0].created_at })).to.not
+				.exist;
+		});
+
+		it('Should filter devices with created_at less or equal than last', async () => {
+			const querystring = `$orderby=created_at asc&$filter=created_at le datetime'${
+				testTimes[testTimes.length - 1].created_at
+			}'`;
+
+			const { body } = await supertest(admin)
+				.get(`/${version}/device?${querystring}`)
+				.expect(200);
+
+			expect(body.d).to.be.an('array').to.have.lengthOf(4);
+		});
+
+		it('Should filter devices with created_at equal first one', async () => {
+			const querystring = `$orderby=created_at asc&$filter=created_at eq datetime'${testTimes[0].created_at}'`;
+
+			const { body } = await supertest(admin)
+				.get(`/${version}/device?${querystring}`)
+				.expect(200);
+
+			expect(_.find(body.d, { created_at: testTimes[0].created_at })).to.exist;
+		});
+
+		it('Should filter devices with created_at not equal first one', async () => {
+			const querystring = `$orderby=created_at asc&$filter=created_at ne datetime'${testTimes[0].created_at}'`;
+
+			const { body } = await supertest(admin)
+				.get(`/${version}/device?${querystring}`)
+				.expect(200);
+
+			// expect(body.d).to.be.an('array').to.have.lengthOf(3);
+			expect(body.d).to.be.an('array').to.have.lengthOf(3);
+			expect(_.find(body.d, { created_at: testTimes[0].created_at })).to.not
+				.exist;
+		});
 	});
 });
