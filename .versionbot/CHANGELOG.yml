@@ -1,4 +1,20 @@
 - commits:
+    - subject: Adding tests for datetime filters
+      hash: 9b165feafce9ad9e92c81d566bf88e69e0f8d804
+      body: |
+        Adding test cases for datetime ODate filters: gt, le, eq, ne
+      footer:
+        Connects-to: '#697'
+        connects-to: '#697'
+        Change-type: patch
+        change-type: patch
+        Signed-off-by: fisehara <harald@balena.io>
+        signed-off-by: fisehara <harald@balena.io>
+      author: fisehara
+      nested: []
+  version: 0.159.12
+  date: 2021-10-18T19:05:45.159Z
+- commits:
     - subject: Add an index to optimize device api key permissions lookups
       hash: c12912294eec02eac85aa892f2bc2632b7cbba7a
       body: ''
