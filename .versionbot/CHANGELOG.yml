@@ -1,4 +1,21 @@
 - commits:
+    - subject: 'mutliCache: Support separate configuration for the shared cache'
+      hash: e0910a7a7967db2726e4c0491c4ab5931af0288e
+      body: ''
+      footer:
+        Change-type: minor
+        change-type: minor
+        See: >-
+          https://www.flowdock.com/app/rulemotion/resin-tech/threads/d3SVFlAr20-rnIZM1ChWR4QGMGI
+        see: >-
+          https://www.flowdock.com/app/rulemotion/resin-tech/threads/d3SVFlAr20-rnIZM1ChWR4QGMGI
+        Signed-off-by: Thodoris Greasidis <thodoris@balena.io>
+        signed-off-by: Thodoris Greasidis <thodoris@balena.io>
+      author: Thodoris Greasidis
+      nested: []
+  version: 0.161.0
+  date: 2021-10-20T12:16:36.258Z
+- commits:
     - subject: Expose `metricsPatchFields`
       hash: 2fc53853b49fbd2b9ac85c31e552d210c8e182ee
       body: ''
