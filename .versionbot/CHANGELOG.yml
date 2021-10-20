@@ -1,4 +1,39 @@
 - commits:
+    - subject: 'multiCache: Fix using the preFetch option as ms instead of seconds'
+      hash: 3c2838237f84c07aef4d8f56a443c672a3d05d87
+      body: |
+        As found in cache-manager's docs:
+        If the remaining TTL is less than refreshThreshold,
+        the system will spawn a background worker to
+        update the value...
+      footer:
+        Change-type: patch
+        change-type: patch
+        See: >-
+          https://github.com/BryanDonovan/node-cache-manager/blob/b3aa1d59885d5a011fd02f8c197c78f4f6235dde/test/multi_caching.unit.js#L1133
+        see: >-
+          https://github.com/BryanDonovan/node-cache-manager/blob/b3aa1d59885d5a011fd02f8c197c78f4f6235dde/test/multi_caching.unit.js#L1133
+        Signed-off-by: Thodoris Greasidis <thodoris@balena.io>
+        signed-off-by: Thodoris Greasidis <thodoris@balena.io>
+      author: Thodoris Greasidis
+      nested: []
+    - subject: 'mutliCache: Support separate configuration for the shared cache'
+      hash: e0910a7a7967db2726e4c0491c4ab5931af0288e
+      body: ''
+      footer:
+        Change-type: minor
+        change-type: minor
+        See: >-
+          https://www.flowdock.com/app/rulemotion/resin-tech/threads/d3SVFlAr20-rnIZM1ChWR4QGMGI
+        see: >-
+          https://www.flowdock.com/app/rulemotion/resin-tech/threads/d3SVFlAr20-rnIZM1ChWR4QGMGI
+        Signed-off-by: Thodoris Greasidis <thodoris@balena.io>
+        signed-off-by: Thodoris Greasidis <thodoris@balena.io>
+      author: Thodoris Greasidis
+      nested: []
+  version: 0.161.0
+  date: 2021-10-20T12:19:13.136Z
+- commits:
     - subject: Expose `metricsPatchFields`
       hash: 2fc53853b49fbd2b9ac85c31e552d210c8e182ee
       body: ''
