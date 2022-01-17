@@ -26,7 +26,7 @@
     "posttest": "docker rmi test-open-balena-api"
   },
   "dependencies": {
-    "@balena/abstract-sql-compiler": "^7.14.1",
+    "@balena/abstract-sql-compiler": "^7.17.0",
     "@balena/es-version": "^1.0.0",
     "@balena/node-metrics-gatherer": "5.7.5",
     "@balena/pinejs": "^14.33.0",
