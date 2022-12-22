@@ -76,7 +76,7 @@
     "fast-glob": "^3.2.7",
     "ipaddr.js": "^2.0.1",
     "json-schema": "^0.3.0",
-    "jsonwebtoken": "^8.5.1",
+    "jsonwebtoken": "^9.0.0",
     "lodash": "^4.17.21",
     "loki-grpc-client": "1.0.5",
     "memoizee": "^0.4.15",
