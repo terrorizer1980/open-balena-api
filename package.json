@@ -58,7 +58,7 @@
     "@types/validator": "^13.6.3",
     "array-sort": "^1.0.0",
     "avsc": "^5.7.3",
-    "aws-sdk": "^2.1007.0",
+    "aws-sdk": "^2.1354.0",
     "balena-device-config": "^6.2.0",
     "balena-semver": "^2.3.0",
     "basic-auth": "^2.0.1",
