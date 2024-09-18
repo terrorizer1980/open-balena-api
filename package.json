@@ -71,7 +71,7 @@
     "cookie-session": "^1.4.0",
     "escape-html": "^1.0.3",
     "eventemitter3": "^4.0.7",
-    "express": "^4.17.1",
+    "express": "^4.20.0",
     "fast-boot2": "^1.1.0",
     "fast-glob": "^3.2.7",
     "ipaddr.js": "^2.0.1",
