@@ -73,7 +73,7 @@
     "eventemitter3": "^4.0.7",
     "express": "^4.17.1",
     "fast-boot2": "^1.1.0",
-    "fast-glob": "^3.2.7",
+    "fast-glob": "^3.3.3",
     "ipaddr.js": "^2.0.1",
     "json-schema": "^0.3.0",
     "jsonwebtoken": "^8.5.1",
